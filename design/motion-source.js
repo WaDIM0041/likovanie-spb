@@ -32,6 +32,49 @@ function tag(selector) {
 }
 const entrance = tag('.hero-copy .location, .hero-copy h1, .hero-copy .intro, .hero-copy .actions, .hero-copy .trial');
 const photo = tag('.hero-photo img')[0];
+const stageSection = document.querySelector('.hero');
+const photoCaption = document.querySelector('.hero-photo figcaption');
+const prefix = location.pathname.includes('/design/') ? '../' : '';
+const scenes = [
+  {src: '003.jpg', alt: 'Артистка ансамбля в народном костюме на сцене', label: 'Сцена'},
+  {src: '002.jpg', alt: 'Ученицы занимаются у хореографического станка', label: 'Занятия'},
+  {src: '091.jpg', alt: 'Ансамбль на сцене', label: 'Ансамбль'}
+];
+const sceneButtons = scenes.map((scene, index) => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.dataset.scene = String(index);
+  button.setAttribute('aria-pressed', String(index === 0));
+  button.textContent = `${String(index + 1).padStart(2, '0')} / ${scene.label}`;
+  return button;
+});
+const scenePicker = document.createElement('div');
+scenePicker.className = 'hero-scene-picker';
+scenePicker.setAttribute('role', 'group');
+scenePicker.setAttribute('aria-label', 'Выберите сцену на главном экране');
+sceneButtons.forEach(button => scenePicker.append(button));
+stageSection.append(scenePicker);
+let activeScene = 0;
+let sceneRequest = 0;
+let sceneTransition;
+sceneButtons.forEach(button => button.addEventListener('click', async () => {
+  const index = Number(button.dataset.scene);
+  if (index === activeScene) return;
+  const request = ++sceneRequest;
+  sceneTransition?.stop();
+  sceneButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  if (!reduced()) {
+    sceneTransition = play(photo, {opacity: [1, 0.15], scale: [1.04, 1.09]}, {duration: 0.2, ease});
+    await sceneTransition;
+  }
+  if (request !== sceneRequest) return;
+  activeScene = index;
+  photo.src = `${prefix}research/assets/${scenes[index].src}`;
+  photo.alt = scenes[index].alt;
+  photoCaption.textContent = scenes[index].label;
+  if (!reduced()) sceneTransition = play(photo, {opacity: [0.15, 1], scale: [1.09, 1.04]}, {duration: 0.45, ease});
+  else {photo.style.opacity = '1'; photo.style.transform = 'none';}
+}));
 const awards = tag('.award-list article');
 const detail = tag('.program-detail > div')[0];
 const stageLights = [...document.querySelectorAll('.hero, .school, .contacts')].map(section => {
@@ -170,7 +213,7 @@ document.querySelectorAll('[data-age]').forEach(button => button.addEventListene
   if (reduced()) { detail.style.opacity = '1'; detail.style.transform = 'none'; }
   else transition = play(detail, { opacity: [0, 1], y: [8, 0] }, { duration: 0.3, ease });
 }));
-document.querySelectorAll('.button, [data-age]').forEach(button => {
+document.querySelectorAll('.button, [data-age], .hero-scene-picker button').forEach(button => {
   button.dataset.motion = 'true';
   button.addEventListener('pointerdown', () => {
     if (!reduced()) play(button, { scale: 0.97 }, { duration: 0.1 });
@@ -193,3 +236,15 @@ document.querySelectorAll('[data-mail-form]').forEach(form => form.addEventListe
   form.querySelector('[data-mail-status]').textContent = 'Письмо подготовлено. Отправьте его в почтовом приложении. Если приложение не открылось, позвоните +7 911 226 92 82.';
   window.location.href = mail;
 }));
+let pointerFrame = 0;
+stageSection.addEventListener('pointermove', event => {
+  if (narrow.matches || reduced() || pointerFrame) return;
+  const bounds = stageSection.getBoundingClientRect();
+  const x = (event.clientX - bounds.left) / bounds.width * 100;
+  const y = (event.clientY - bounds.top) / bounds.height * 100;
+  pointerFrame = requestAnimationFrame(() => {
+    stageSection.style.setProperty('--stage-x', `${x}%`);
+    stageSection.style.setProperty('--stage-y', `${y}%`);
+    pointerFrame = 0;
+  });
+});

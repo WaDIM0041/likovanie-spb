@@ -13,6 +13,17 @@ const { chromium } = require(require.resolve('playwright', {
     await page.goto(process.env.SITE_URL || 'http://127.0.0.1:8000/');
     await page.waitForFunction(() => document.documentElement.dataset.motionEngine === 'framer-motion');
     assert.ok(await page.locator('.hero-photo').evaluate(el => el.getBoundingClientRect().width >= document.querySelector('.hero').getBoundingClientRect().width - 1), 'The stage photograph fills the hero, instead of a conventional two-column card');
+    assert.equal(await page.locator('.hero-scene-picker button').count(), 3, 'Visitors can explicitly change the opening scene');
+    assert.match(await page.locator('.hero-photo img').getAttribute('src'), /003\.jpg$/);
+    await page.locator('.hero-scene-picker [data-scene="1"]').click();
+    await page.waitForFunction(() => document.querySelector('.hero-photo img').getAttribute('src').endsWith('002.jpg'));
+    assert.match(await page.locator('.hero-photo img').getAttribute('src'), /002\.jpg$/, 'Scene control switches to a real rehearsal photograph');
+    assert.equal(await page.locator('.hero-scene-picker [aria-pressed="true"]').count(), 1);
+    await page.locator('.hero-scene-picker [data-scene="2"]').click();
+    await page.waitForFunction(() => document.querySelector('.hero-photo img').getAttribute('src').endsWith('091.jpg'));
+    assert.match(await page.locator('.hero-photo img').getAttribute('src'), /091\.jpg$/, 'Scene control switches to a real ensemble photograph');
+    await page.locator('.hero-scene-picker [data-scene="0"]').click();
+    await page.waitForFunction(() => document.querySelector('.hero-photo img').getAttribute('src').endsWith('003.jpg'));
     assert.equal(await page.locator('.stage-marquee').count(), 1, 'A moving typographic scene connects the hero to the story');
     assert.ok(await page.locator('.stage-marquee-track > span').first().evaluate(el => el.getBoundingClientRect().width >= innerWidth), 'Each marquee sequence fills the viewport without a loop-end gap');
     assert.ok(await page.locator('.stage-beam').count() >= 2, 'Visible moving stage lights are required');
@@ -40,6 +51,7 @@ const { chromium } = require(require.resolve('playwright', {
     assert.ok(await beam.evaluate(el => el.getAnimations().some(a => a.playState === 'running')), 'Returning to a cached page restarts background movement');
     await page.emulateMedia({reducedMotion: 'reduce'});
     assert.equal(await page.locator('[data-motion]').evaluateAll(els => els.every(el => Number(getComputedStyle(el).opacity) === 1 && getComputedStyle(el).transform === 'none')), true, 'Reduced motion restores content');
+    await page.waitForFunction(() => document.querySelectorAll('.stage-beam').length === [...document.querySelectorAll('.stage-beam')].filter(el => el.getAnimations().every(a => a.playState !== 'running')).length, null, {timeout: 3000});
     assert.equal(await page.locator('.stage-beam').evaluateAll(els => els.flatMap(el => el.getAnimations()).filter(a => a.playState === 'running').length), 0);
     for (const width of [390, 320]) {
       await page.setViewportSize({width, height: 844});
