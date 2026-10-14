@@ -38,6 +38,23 @@ const {chromium} = require(require.resolve('playwright', {paths: [process.env.PL
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `No overflow at ${width}px`);
       assert.ok(await canvas.evaluate(el => el.getBoundingClientRect().top < innerHeight), `The visual is visible immediately at ${width}px`);
     }
+    const mobile = await browser.newPage({viewport: {width:390,height:844},isMobile:true,hasTouch:true});
+    mobile.on('pageerror', error => errors.push(error.message));
+    await mobile.goto(process.env.SITE_URL || 'http://127.0.0.1:8000/');
+    await mobile.locator('.ribbon-toggle').click();
+    const box = await mobile.locator('.ribbon-canvas').boundingBox();
+    const touch = await mobile.context().newCDPSession(mobile);
+    const x = box.x + box.width / 2, y = box.y + box.height / 2;
+    await touch.send('Input.dispatchTouchEvent', {type:'touchStart',touchPoints:[{x,y}]});
+    for (const dy of [20,50,90,125]) {
+      await touch.send('Input.dispatchTouchEvent', {type:'touchMove',touchPoints:[{x,y:y-dy}]});
+      await mobile.waitForTimeout(20);
+    }
+    await touch.send('Input.dispatchTouchEvent', {type:'touchEnd',touchPoints:[]});
+    assert.ok(await mobile.evaluate(() => scrollY > 0), 'The canvas allows touch scrolling');
+    assert.equal(await mobile.locator('.ribbon-toggle').getAttribute('aria-pressed'), 'true', 'A swipe must not resume a paused ribbon');
+    await mobile.locator('.ribbon-gesture').tap();
+    assert.equal(await mobile.locator('.ribbon-toggle').getAttribute('aria-pressed'), 'false', 'A deliberate gesture resumes the ribbon');
     assert.deepEqual(errors, []);
     console.log('Passed: immediate ribbon movement, pause/resume, interaction, offscreen suspension, reduced motion, responsive first screen');
   } finally { await browser.close(); }

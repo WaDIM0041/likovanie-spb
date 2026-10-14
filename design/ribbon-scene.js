@@ -152,7 +152,7 @@ export function createRibbonScene(banner) {
   });
   banner.addEventListener('pointerleave',()=>{targetX=0;targetY=0;});
   function flourish() {if(enabled){paused=false;pulse=1;sync();}}
-  canvas.addEventListener('pointerdown',flourish);
+  canvas.addEventListener('click',flourish);
   gesture.addEventListener('click',flourish);
   toggle.addEventListener('click',()=>{paused=!paused;sync();});
   resize();
