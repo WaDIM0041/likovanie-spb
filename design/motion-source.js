@@ -1,9 +1,11 @@
 import { animate, stagger, inView, scroll } from 'framer-motion/dom';
 import { createRibbonScene } from './ribbon-scene.js';
+import { createStageEffects } from './stage-effects.js';
 
 const media = matchMedia('(prefers-reduced-motion: reduce)');
 const narrow = matchMedia('(max-width: 700px)');
 const ribbonScene = createRibbonScene(document.querySelector('.stage-banner'));
+const stageEffects = createStageEffects();
 const ease = [0.22, 1, 0.36, 1];
 const controls = new Set();
 const disposers = [];
@@ -19,6 +21,7 @@ function play(target, frames, options) {
 }
 function reset() {
   ribbonScene.setMotion(false);
+  stageEffects.setMotion(false);
   clearTimeout(autoTimer);
   sceneRequest++;
   automaticRequest = 0;
@@ -192,6 +195,7 @@ function startAmbience() {
   if (reduced() || ambientPaused || document.hidden) return;
   syncAutoplay();
   ribbonScene.setMotion(true);
+  stageEffects.setMotion(true);
   beams.forEach((beam, index) => {
     const direction = index % 2 ? -1 : 1;
     const control = play(beam, {
@@ -218,6 +222,7 @@ function stopAmbience() {
   clearTimeout(autoTimer);
   syncAutoplay();
   ribbonScene.setMotion(false);
+  stageEffects.setMotion(false);
   ambientControls.forEach(control => { control.stop(); controls.delete(control); });
   ambientControls.clear();
 }
@@ -243,6 +248,7 @@ document.addEventListener('visibilitychange', () => {
 function start() {
   document.documentElement.dataset.motionPreference = manualMotion ? 'manual' : reduced() ? 'off' : 'on';
   ribbonScene.setMotion(!reduced() && !ambientPaused && !document.hidden);
+  stageEffects.setMotion(!reduced() && !ambientPaused && !document.hidden);
   syncAutoplay();
   if (reduced()) return;
   startAmbience();

@@ -1,7 +1,7 @@
-// A projected silk ribbon: no textures, network requests or rendering dependencies.
+// Immediate Canvas ribbon, upgraded to a separately bundled local Three.js scene.
 export function createRibbonScene(banner) {
   if (!banner) return {setMotion() {}};
-  const canvas = document.createElement('canvas');
+  let canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   if (!ctx) return {setMotion() {}};
   canvas.className = 'ribbon-canvas';
@@ -10,6 +10,7 @@ export function createRibbonScene(banner) {
   scene.className = 'ribbon-scene';
   scene.innerHTML = '<p class="ribbon-label"><span aria-hidden="true">✦</span> Движение в вашем ритме</p><div class="ribbon-controls"><button class="ribbon-gesture" type="button">Задать движение <span aria-hidden="true"></span></button><button class="ribbon-toggle" type="button" aria-pressed="false">Пауза</button></div>';
   scene.prepend(canvas);
+  scene.dataset.ribbonRenderer='canvas';
   banner.append(scene);
   banner.classList.add('has-ribbon');
   const toggle = scene.querySelector('.ribbon-toggle');
@@ -23,6 +24,25 @@ export function createRibbonScene(banner) {
   let enabled = false, paused = false, visible = true, initialized = false;
   let raf = 0, last = 0, lastPaint = 0, phase = 0, reveal = 0.08, pulse = 0;
   let pointerX = 0, pointerY = 0, targetX = 0, targetY = 0;
+  let webgl=null,upgradeStarted=false;
+  const fallbackCanvas=canvas;
+  const scriptURL=new URL(document.currentScript?.src || 'design/motion-bundle.js',location.href);
+  const moduleURL=new URL('ribbon-webgl-bundle.js'+scriptURL.search,scriptURL);
+  async function upgrade() {
+    if(upgradeStarted||!canRun())return;upgradeStarted=true;
+    try {
+      const {createWebGLRibbon}=await import(moduleURL.href);
+      if(!canRun()){upgradeStarted=false;return;}
+      const replacement=document.createElement('canvas');replacement.className='ribbon-canvas';replacement.setAttribute('aria-hidden','true');
+      const renderer=createWebGLRibbon(replacement);if(!renderer)return;
+      webgl=renderer;resizeObserver.unobserve(canvas);canvas.replaceWith(replacement);canvas=replacement;resizeObserver.observe(canvas);
+      scene.dataset.ribbonRenderer='three';resize();draw();
+      canvas.addEventListener('webglcontextlost',event=>{
+        event.preventDefault();resizeObserver.unobserve(canvas);canvas.replaceWith(fallbackCanvas);canvas=fallbackCanvas;
+        webgl.dispose();webgl=null;resizeObserver.observe(canvas);scene.dataset.ribbonRenderer='canvas';resize();draw();
+      });
+    } catch {scene.dataset.ribbonRenderer='canvas';}
+  }
 
   function rotate(p, yaw, tilt) {
     const x = p[0] * Math.cos(yaw) + p[2] * Math.sin(yaw);
@@ -30,6 +50,7 @@ export function createRibbonScene(banner) {
     return [x, p[1] * Math.cos(tilt) - z * Math.sin(tilt), p[1] * Math.sin(tilt) + z * Math.cos(tilt)];
   }
   function draw() {
+    if(webgl){webgl.render({phase,reveal,pulse,pointerX,pointerY});return;}
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     ctx.clearRect(0, 0, width, height);
     const cx = width * .5, cy = height * .47;
@@ -128,6 +149,7 @@ export function createRibbonScene(banner) {
   }
   function sync() {
     const running=canRun();scene.dataset.ribbonState=running?'playing':'paused';
+    if(running&&!upgradeStarted)setTimeout(upgrade,150);
     if(running&&!raf){last=0;raf=requestAnimationFrame(frame);}
     else if(!running&&raf){cancelAnimationFrame(raf);raf=0;}
     toggle.setAttribute('aria-pressed',String(paused));
@@ -138,12 +160,13 @@ export function createRibbonScene(banner) {
   function resize() {
     const rect=canvas.getBoundingClientRect();width=Math.max(1,rect.width);height=Math.max(1,rect.height);
     pixelRatio=Math.min(devicePixelRatio||1,1.75);
-    canvas.width=Math.round(width*pixelRatio);canvas.height=Math.round(height*pixelRatio);
+    if(webgl)webgl.resize(width,height,pixelRatio);
+    else {canvas.width=Math.round(width*pixelRatio);canvas.height=Math.round(height*pixelRatio);}
     if(initialized)draw();
   }
   const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:0});
   observer.observe(scene);
-  new ResizeObserver(resize).observe(canvas);
+  const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(canvas);
   banner.addEventListener('pointermove',event=>{
     if(!enabled||event.pointerType==='touch')return;
     const bounds=canvas.getBoundingClientRect();
@@ -152,7 +175,7 @@ export function createRibbonScene(banner) {
   });
   banner.addEventListener('pointerleave',()=>{targetX=0;targetY=0;});
   function flourish() {if(enabled){paused=false;pulse=1;sync();}}
-  canvas.addEventListener('click',flourish);
+  scene.addEventListener('click',event=>{if(event.target===canvas)flourish();});
   gesture.addEventListener('click',flourish);
   toggle.addEventListener('click',()=>{paused=!paused;sync();});
   resize();

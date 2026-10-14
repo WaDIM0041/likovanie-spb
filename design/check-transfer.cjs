@@ -12,14 +12,14 @@ const normal=s=>s.replace(/\s+/g,' ').trim();
   for(const t of manifest.teachers){assert.ok(text.includes(normal(t.name)));assert.ok(text.includes(normal(t.text)));}
   for(const review of d.reviews)assert.ok(text.includes(normal(review.text)),'Full review '+review.name);
   assert.equal(await page.locator('#gallery img').count(),49);
-  assert.equal(await page.locator('video').count(),3);
+  assert.equal(await page.locator('.video-grid video').count(),3);
   assert.equal(await page.locator('[data-mail-form]').count(),2);
   for(const row of manifest.scheduleRows)for(const value of row.filter(Boolean))assert.ok(text.includes(normal(value)),'Schedule content '+value);
   const seo=await page.evaluate(()=>({h1:document.querySelectorAll('h1').length,title:document.title,description:document.querySelector('meta[name=description]')?.content,lang:document.documentElement.lang,robots:document.querySelector('meta[name=robots]')?.content,schemas:[...document.querySelectorAll('script[type="application/ld+json"]')].map(s=>JSON.parse(s.textContent)),background:getComputedStyle(document.querySelector('.hero')).backgroundImage+' '+getComputedStyle(document.querySelector('.hero-photo'),'::after').backgroundImage}));
   assert.equal(seo.h1,1);assert.ok(seo.description.length>50);assert.equal(seo.lang,'ru');assert.ok(seo.robots.includes('noindex'));assert.ok(seo.schemas.length);assert.ok(seo.background.includes('gradient'));
   const links=await page.locator('[href],[src],[poster]').evaluateAll(es=>es.flatMap(el=>['href','src','poster'].map(a=>el.getAttribute(a)).filter(Boolean)));
   for(const link of links){if(link.startsWith('#')){assert.ok(await page.locator(link).count(),'Broken anchor '+link);continue;}if(/^(https?:|mailto:|tel:)/.test(link))continue;assert.ok(fs.existsSync(path.resolve(link.split(/[?#]/)[0])),'Missing local resource '+link);}
-  for(const video of await page.locator('video').all()){
+  for(const video of await page.locator('.video-grid video').all()){
    await video.evaluate(v=>{v.preload='metadata';v.load()});
    await page.waitForFunction(el=>el.readyState>=1,await video.elementHandle());
    assert.ok(await video.evaluate(v=>v.duration>0&&v.videoWidth>0),'Playable video');

@@ -14,7 +14,8 @@
   "dependencies": {
     "framer-motion": "file:vendor/motion/packages/framer-motion",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "0.180.0"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^5.1.0",
