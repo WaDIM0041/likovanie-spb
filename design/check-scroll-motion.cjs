@@ -1,0 +1,51 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const { chromium } = require(require.resolve('playwright', {
+  paths: [process.env.PLAYWRIGHT_MODULE_PATH || '/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules']
+}));
+(async () => {
+  const browser = await chromium.launch({headless: true,
+    ...(fs.existsSync('/usr/bin/chromium') ? {executablePath: '/usr/bin/chromium', args: ['--no-sandbox']} : {})});
+  try {
+    const page = await browser.newPage({viewport: {width: 1440, height: 900}});
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(process.env.SITE_URL || 'http://127.0.0.1:8000/');
+    await page.waitForFunction(() => document.documentElement.dataset.motionEngine === 'framer-motion');
+    assert.ok(await page.locator('.stage-beam').count() >= 2, 'Visible moving stage lights are required');
+    const beam = page.locator('.hero .stage-beam').first();
+    const initial = await beam.evaluate(el => getComputedStyle(el).transform);
+    await page.waitForFunction(({initial}) => getComputedStyle(document.querySelector('.hero .stage-beam')).transform !== initial, {initial});
+    await page.locator('.motion-toggle').click();
+    assert.equal(await page.locator('.motion-toggle').getAttribute('aria-pressed'), 'true');
+    assert.equal(await page.locator('.stage-beam').evaluateAll(els => els.flatMap(el => el.getAnimations()).filter(a => a.playState === 'running').length), 0, 'Background pause stops movement');
+    await page.locator('.motion-toggle').click();
+    assert.ok(await beam.evaluate(el => el.getAnimations().some(a => a.playState === 'running')), 'Background resumes');
+    await page.waitForFunction(() => Number(getComputedStyle(document.querySelector('h1')).opacity) === 1);
+    await page.evaluate(() => scrollTo({top: 350, behavior: 'instant'}));
+    await page.waitForFunction(() => {
+      const t = new DOMMatrix(getComputedStyle(document.querySelector('.hero-photo')).transform);
+      return t.m42 > 30;
+    });
+    assert.ok(await page.locator('.scroll-progress').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m11 > 0), 'Scroll progress follows document');
+    await page.locator('.teacher-grid').scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => [...document.querySelectorAll('.teacher-grid article')].some(el => el.getAnimations().some(a => a.playState === 'running')), null, {timeout: 3000});
+    await page.evaluate(() => {
+      dispatchEvent(new PageTransitionEvent('pagehide', {persisted: true}));
+      dispatchEvent(new PageTransitionEvent('pageshow', {persisted: true}));
+    });
+    assert.ok(await beam.evaluate(el => el.getAnimations().some(a => a.playState === 'running')), 'Returning to a cached page restarts background movement');
+    await page.emulateMedia({reducedMotion: 'reduce'});
+    assert.equal(await page.locator('[data-motion]').evaluateAll(els => els.every(el => Number(getComputedStyle(el).opacity) === 1 && getComputedStyle(el).transform === 'none')), true, 'Reduced motion restores content');
+    assert.equal(await page.locator('.stage-beam').evaluateAll(els => els.flatMap(el => el.getAnimations()).filter(a => a.playState === 'running').length), 0);
+    for (const width of [390, 320]) {
+      await page.setViewportSize({width, height: 844});
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'No horizontal overflow');
+    }
+    await page.emulateMedia({reducedMotion: 'no-preference'});
+    await page.evaluate(() => scrollTo({top: 0, behavior: 'instant'}));
+    await page.waitForFunction(() => document.querySelector('.hero .stage-beam').getAnimations().some(a => a.playState === 'running'));
+    assert.deepEqual(errors, []);
+    console.log('Passed: moving background, pause/resume, scroll parallax, section reveal, progress, reduced motion, mobile overflow, JS errors');
+  } finally { await browser.close(); }
+})().catch(error => {console.error(error); process.exitCode = 1;});

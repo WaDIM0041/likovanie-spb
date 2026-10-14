@@ -18,7 +18,7 @@ const normal=s=>s.replace(/\s+/g,' ').trim();
   const seo=await page.evaluate(()=>({h1:document.querySelectorAll('h1').length,title:document.title,description:document.querySelector('meta[name=description]')?.content,lang:document.documentElement.lang,robots:document.querySelector('meta[name=robots]')?.content,schemas:[...document.querySelectorAll('script[type="application/ld+json"]')].map(s=>JSON.parse(s.textContent)),background:getComputedStyle(document.querySelector('.hero')).backgroundImage}));
   assert.equal(seo.h1,1);assert.ok(seo.description.length>50);assert.equal(seo.lang,'ru');assert.ok(seo.robots.includes('noindex'));assert.ok(seo.schemas.length);assert.ok(seo.background.includes('gradient'));
   const links=await page.locator('[href],[src],[poster]').evaluateAll(es=>es.flatMap(el=>['href','src','poster'].map(a=>el.getAttribute(a)).filter(Boolean)));
-  for(const link of links){if(link.startsWith('#')){assert.ok(await page.locator(link).count(),'Broken anchor '+link);continue;}if(/^(https?:|mailto:|tel:)/.test(link))continue;assert.ok(fs.existsSync(path.resolve(link.split('#')[0])),'Missing local resource '+link);}
+  for(const link of links){if(link.startsWith('#')){assert.ok(await page.locator(link).count(),'Broken anchor '+link);continue;}if(/^(https?:|mailto:|tel:)/.test(link))continue;assert.ok(fs.existsSync(path.resolve(link.split(/[?#]/)[0])),'Missing local resource '+link);}
   for(const video of await page.locator('video').all()){
    await video.evaluate(v=>{v.preload='metadata';v.load()});
    await page.waitForFunction(el=>el.readyState>=1,await video.elementHandle());
