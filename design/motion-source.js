@@ -38,7 +38,6 @@ const curtains = ['left', 'right'].map(side => {
   const curtain = document.createElement('div');
   curtain.className = `stage-curtain stage-curtain-${side}`;
   curtain.setAttribute('aria-hidden', 'true');
-  curtain.dataset.motion = 'true';
   stageSection.querySelector('.hero-photo').append(curtain);
   return curtain;
 });
@@ -188,13 +187,14 @@ function start() {
   disposers.push(scroll(progress => {
     progressBar.style.transform = `scaleX(${progress})`;
   }));
+  const headerHeight = Math.round(document.querySelector('header').getBoundingClientRect().height);
   disposers.push(scroll(progress => {
     parallaxPhoto.style.transform = `translateY(${progress * (narrow.matches ? 35 : 120)}px)`;
     stageLights[0].style.transform = `translateY(${progress * -70}px)`;
-    const open = Math.min(1, Math.max(0.25, 0.25 + progress * 2.6));
+    const open = Math.min(1, 0.38 + progress * 2.8);
     curtains[0].style.transform = `translateX(${-open * 100}%)`;
     curtains[1].style.transform = `translateX(${open * 100}%)`;
-  }, {target: document.querySelector('.hero'), offset: ['start start', 'end start']}));
+  }, {target: stageSection, offset: [`start ${headerHeight}px`, `end ${headerHeight}px`]}));
 }
 media.addEventListener('change', () => {
   manualMotion = false;
