@@ -1,7 +1,9 @@
 import { animate, stagger, inView, scroll } from 'framer-motion/dom';
+import { createRibbonScene } from './ribbon-scene.js';
 
 const media = matchMedia('(prefers-reduced-motion: reduce)');
 const narrow = matchMedia('(max-width: 700px)');
+const ribbonScene = createRibbonScene(document.querySelector('.stage-banner'));
 const ease = [0.22, 1, 0.36, 1];
 const controls = new Set();
 const disposers = [];
@@ -16,6 +18,7 @@ function play(target, frames, options) {
   return control;
 }
 function reset() {
+  ribbonScene.setMotion(false);
   disposers.splice(0).forEach(stop => stop());
   controls.forEach(control => control.stop());
   controls.clear();
@@ -122,6 +125,7 @@ toggle.textContent = reduced() ? 'Включить эффекты' : 'Остан
 document.querySelector('.hero').append(toggle);
 function startAmbience() {
   if (reduced() || ambientPaused || document.hidden) return;
+  ribbonScene.setMotion(true);
   beams.forEach((beam, index) => {
     const direction = index % 2 ? -1 : 1;
     const control = play(beam, {
@@ -145,6 +149,7 @@ function startAmbience() {
   }
 }
 function stopAmbience() {
+  ribbonScene.setMotion(false);
   ambientControls.forEach(control => { control.stop(); controls.delete(control); });
   ambientControls.clear();
 }
@@ -169,6 +174,7 @@ document.addEventListener('visibilitychange', () => {
 });
 function start() {
   document.documentElement.dataset.motionPreference = manualMotion ? 'manual' : reduced() ? 'off' : 'on';
+  ribbonScene.setMotion(!reduced() && !ambientPaused && !document.hidden);
   if (reduced()) return;
   startAmbience();
   play(entrance, { opacity: [0, 1], y: [48, 0] }, { duration: 0.85, delay: stagger(0.12), ease });

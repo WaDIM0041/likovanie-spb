@@ -2,9 +2,17 @@ const {rollup}=require('rollup');
 const {nodeResolve}=require('@rollup/plugin-node-resolve');
 const replace=require('@rollup/plugin-replace');
 const terser=require('@rollup/plugin-terser');
+const fs=require('node:fs');
+const {createHash}=require('node:crypto');
 (async()=>{
  const bundle=await rollup({input:'design/motion-source.js',plugins:[nodeResolve({browser:true}),replace({preventAssignment:true,'process.env.NODE_ENV':JSON.stringify('production')}),terser()]});
  await bundle.write({file:'design/motion-bundle.js',format:'iife'});
  await bundle.close();
+ const assets=['motion-bundle.js','style.css','stage.css'];
+ const hash=createHash('sha256');
+ assets.forEach(name=>hash.update(fs.readFileSync(`design/${name}`)));
+ const version=hash.digest('hex').slice(0,10);
+ const html=fs.readFileSync('index.html','utf8');
+ fs.writeFileSync('index.html',html.replace(/design\/(motion-bundle\.js|style\.css|stage\.css)(?:\?v=[\w-]+)?/g,(_,name)=>`design/${name}?v=${version}`));
  console.log('Built design/motion-bundle.js from local Framer Motion');
 })().catch(e=>{console.error(e);process.exitCode=1});
