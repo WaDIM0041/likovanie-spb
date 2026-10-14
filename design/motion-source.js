@@ -197,10 +197,12 @@ function start() {
   disposers.push(scroll(progress => {
     parallaxPhoto.style.transform = `translateY(${progress * (narrow.matches ? 35 : 120)}px)`;
     stageLights[0].style.transform = `translateY(${progress * -70}px)`;
-    const open = Math.min(1, 0.38 + progress * 2.8);
+  }, {target: stageSection, offset: [`start ${headerHeight}px`, `end ${headerHeight}px`]}));
+  disposers.push(scroll(progress => {
+    const open = 0.38 + Math.max(0, Math.min(1, progress)) * 0.62;
     curtains[0].style.transform = `translateX(${-open * 100}%)`;
     curtains[1].style.transform = `translateX(${open * 100}%)`;
-  }, {target: stageSection, offset: [`start ${headerHeight}px`, `end ${headerHeight}px`]}));
+  }, {target: stageSection, offset: ['start 95%', 'start 55%']}));
 }
 media.addEventListener('change', () => {
   manualMotion = false;
