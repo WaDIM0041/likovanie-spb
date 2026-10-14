@@ -34,6 +34,14 @@ const entrance = tag('.hero-copy .location, .hero-copy h1, .hero-copy .intro, .h
 const photo = tag('.hero-photo img')[0];
 const stageSection = document.querySelector('.hero');
 const photoCaption = document.querySelector('.hero-photo figcaption');
+const curtains = ['left', 'right'].map(side => {
+  const curtain = document.createElement('div');
+  curtain.className = `stage-curtain stage-curtain-${side}`;
+  curtain.setAttribute('aria-hidden', 'true');
+  curtain.dataset.motion = 'true';
+  stageSection.querySelector('.hero-photo').append(curtain);
+  return curtain;
+});
 const prefix = location.pathname.includes('/design/') ? '../' : '';
 const scenes = [
   {src: '003.jpg', alt: 'Артистка ансамбля в народном костюме на сцене', label: 'Сцена'},
@@ -57,23 +65,36 @@ stageSection.append(scenePicker);
 let activeScene = 0;
 let sceneRequest = 0;
 let sceneTransition;
+let transitionImage;
 sceneButtons.forEach(button => button.addEventListener('click', async () => {
   const index = Number(button.dataset.scene);
   if (index === activeScene) return;
   const request = ++sceneRequest;
   sceneTransition?.stop();
+  transitionImage?.remove();
+  transitionImage = null;
   sceneButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
   if (!reduced()) {
-    sceneTransition = play(photo, {opacity: [1, 0.15], scale: [1.04, 1.09]}, {duration: 0.2, ease});
-    await sceneTransition;
+    const next = new Image();
+    next.className = 'scene-transition-image';
+    next.src = `${prefix}research/assets/${scenes[index].src}`;
+    next.alt = '';
+    next.setAttribute('aria-hidden', 'true');
+    transitionImage = next;
+    photo.parentElement.append(next);
+    sceneTransition = play(next, {opacity: [0, 1], scale: [1.09, 1.04]}, {duration: 0.72, ease});
+    const captionOut = play(photoCaption, {opacity: [1, 0], y: [0, -5]}, {duration: 0.16, ease});
+    await Promise.all([sceneTransition, captionOut]);
   }
   if (request !== sceneRequest) return;
   activeScene = index;
   photo.src = `${prefix}research/assets/${scenes[index].src}`;
   photo.alt = scenes[index].alt;
   photoCaption.textContent = scenes[index].label;
-  if (!reduced()) sceneTransition = play(photo, {opacity: [0.15, 1], scale: [1.09, 1.04]}, {duration: 0.45, ease});
-  else {photo.style.opacity = '1'; photo.style.transform = 'none';}
+  transitionImage?.remove();
+  transitionImage = null;
+  if (!reduced()) sceneTransition = play(photoCaption, {opacity: [0, 1], y: [5, 0]}, {duration: 0.32, ease});
+  else {photo.style.opacity = '1'; photo.style.transform = 'none'; photoCaption.style.opacity = '1'; photoCaption.style.transform = 'none';}
 }));
 const awards = tag('.award-list article');
 const detail = tag('.program-detail > div')[0];
@@ -170,6 +191,9 @@ function start() {
   disposers.push(scroll(progress => {
     parallaxPhoto.style.transform = `translateY(${progress * (narrow.matches ? 35 : 120)}px)`;
     stageLights[0].style.transform = `translateY(${progress * -70}px)`;
+    const open = Math.min(1, Math.max(0.25, 0.25 + progress * 2.6));
+    curtains[0].style.transform = `translateX(${-open * 100}%)`;
+    curtains[1].style.transform = `translateX(${open * 100}%)`;
   }, {target: document.querySelector('.hero'), offset: ['start start', 'end start']}));
 }
 media.addEventListener('change', () => {

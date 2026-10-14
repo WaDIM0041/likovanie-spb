@@ -13,9 +13,12 @@ const { chromium } = require(require.resolve('playwright', {
     await page.goto(process.env.SITE_URL || 'http://127.0.0.1:8000/');
     await page.waitForFunction(() => document.documentElement.dataset.motionEngine === 'framer-motion');
     assert.ok(await page.locator('.hero-photo').evaluate(el => el.getBoundingClientRect().width >= document.querySelector('.hero').getBoundingClientRect().width - 1), 'The stage photograph fills the hero, instead of a conventional two-column card');
+    assert.equal(await page.locator('.stage-curtain').count(), 2, 'The opening photograph is framed by animated stage curtains');
     assert.equal(await page.locator('.hero-scene-picker button').count(), 3, 'Visitors can explicitly change the opening scene');
     assert.match(await page.locator('.hero-photo img').getAttribute('src'), /003\.jpg$/);
     await page.locator('.hero-scene-picker [data-scene="1"]').click();
+    await page.waitForFunction(() => document.querySelectorAll('.hero-photo .scene-transition-image').length === 1);
+    assert.ok(await page.locator('.scene-transition-image').evaluate(el => el.getAnimations().some(a => a.playState === 'running')), 'A new scene overlaps and fades in above the current photo');
     await page.waitForFunction(() => document.querySelector('.hero-photo img').getAttribute('src').endsWith('002.jpg'));
     assert.match(await page.locator('.hero-photo img').getAttribute('src'), /002\.jpg$/, 'Scene control switches to a real rehearsal photograph');
     assert.equal(await page.locator('.hero-scene-picker [aria-pressed="true"]').count(), 1);
@@ -36,6 +39,11 @@ const { chromium } = require(require.resolve('playwright', {
     await page.locator('.motion-toggle').click();
     assert.ok(await beam.evaluate(el => el.getAnimations().some(a => a.playState === 'running')), 'Background resumes');
     await page.waitForFunction(() => Number(getComputedStyle(document.querySelector('h1')).opacity) === 1);
+    const curtainStart = await page.locator('.stage-curtain-left').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m41);
+    await page.evaluate(() => scrollTo({top: 200, behavior: 'instant'}));
+    await page.waitForFunction(start => new DOMMatrix(getComputedStyle(document.querySelector('.stage-curtain-left')).transform).m41 < start - 10, curtainStart);
+    const curtainReveal = await page.locator('.stage-curtain-left').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m41);
+    assert.ok(curtainReveal < curtainStart, 'Ordinary scrolling parts the stage curtains around the photograph');
     await page.evaluate(() => scrollTo({top: 350, behavior: 'instant'}));
     await page.waitForFunction(() => {
       const t = new DOMMatrix(getComputedStyle(document.querySelector('.hero-photo')).transform);
