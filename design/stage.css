@@ -211,6 +211,8 @@ html:has(.stage-home){scroll-padding-top:140px}
 .stage-home .hero{min-height:clamp(650px,88svh,900px)}
 .stage-home .hero .hero-wordmark{z-index:3;pointer-events:none}
 .stage-home .hero .hero-scroll{z-index:4}
+.stage-home .button,.stage-home .stage-banner .button,.stage-home .hero .button,.stage-home .enrol-grid .button{border-radius:14px;box-shadow:0 6px 18px #24131f29,inset 0 1px 0 #ffffff30}
+.stage-home .hero-scene-picker button,.stage-home #programs .age-buttons button,.stage-home .motion-toggle{border-radius:10px;box-shadow:0 4px 12px #180b1526,inset 0 1px 0 #ffffff20}
 @keyframes stage-button-lustre{
   0%{background-position:140% 0;box-shadow:0 0 12px #e6bb8344,0 8px 24px #ae203722}
   50%{box-shadow:0 0 24px #ffd58d88,0 8px 30px #e4547a44}
