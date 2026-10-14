@@ -1,0 +1,32 @@
+{
+  "name": "likovanie",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:motion": "node scripts/build-motion.cjs",
+    "check:motion": "node scripts/check-motion.cjs"
+  },
+  "workspaces": [
+    "vendor/motion/packages/motion-utils",
+    "vendor/motion/packages/motion-dom",
+    "vendor/motion/packages/framer-motion"
+  ],
+  "dependencies": {
+    "framer-motion": "file:vendor/motion/packages/framer-motion",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "rollup": "4.59.0",
+    "rollup-plugin-dts": "6.1.0",
+    "rollup-plugin-preserve-directives": "^0.4.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "typescript": "5.4.3"
+  }
+}

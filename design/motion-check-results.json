@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-14T04:54:43.787Z",
+  "engine": "framer-motion",
+  "entrance": {
+    "opacity": 0,
+    "transform": "matrix(1, 0, 0, 1, 0, 18)"
+  },
+  "rapidSelection": "passed",
+  "reducedMotionLiveSwitch": "passed",
+  "reducedMotionSelection": "passed",
+  "errors": []
+}

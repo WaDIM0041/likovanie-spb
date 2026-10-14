@@ -1,0 +1,23 @@
+User-Agent: *
+Disallow: /page72891551.html
+Disallow: /privacy
+Disallow: /page72891569.html
+Disallow: /soglasie
+Disallow: /page72890415.html
+Disallow: /oshibka
+Disallow: /tilda/form*
+Disallow: /tilda/rec*
+Disallow: /tilda/click*
+Disallow: /tilda/scroll*
+Disallow: /tilda/popup*
+Disallow: /tilda/cart*
+Disallow: /tilda/product*
+Disallow: /tilda/event*
+Disallow:
+
+
+Sitemap: https://likovanie-spb.ru/sitemap.xml
+
+# LLM metadata
+# https://likovanie-spb.ru/llms.txt
+# https://likovanie-spb.ru/llms-full.txt

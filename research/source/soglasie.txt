@@ -1,0 +1,173 @@
+<!DOCTYPE html> <html lang="ru"> <head> <meta charset="utf-8" /> <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!--metatextblock--> <title>Согласие на обработку данных</title> <meta property="og:url" content="https://likovanie-spb.ru/soglasie" /> <meta property="og:title" content="Согласие на обработку данных" /> <meta property="og:description" content="" /> <meta property="og:type" content="website" /> <link rel="canonical" href="https://likovanie-spb.ru/soglasie"> <!--/metatextblock--> <meta name="format-detection" content="telephone=no" /> <meta http-equiv="x-dns-prefetch-control" content="on"> <link rel="dns-prefetch" href="https://ws.tildacdn.com"> <link rel="dns-prefetch" href="https://static.tildacdn.com"> <link rel="dns-prefetch" href="https://fonts.tildacdn.com"> <meta name="robots" content="noindex,nofollow" /> <!--favicons--> <link rel="icon" type="image/png" sizes="32x32" href="https://static.tildacdn.com/tild6238-3139-4739-a234-313239393037/Frame_3.png" media="(prefers-color-scheme: light)"/> <link rel="icon" type="image/png" sizes="32x32" href="https://static.tildacdn.com/tild3334-6364-4539-b266-663766303462/Frame_3_1.png" media="(prefers-color-scheme: dark)"/> <link rel="icon" type="image/svg+xml" sizes="any" href="https://static.tildacdn.com/tild3438-3635-4965-a237-626237646331/Frame_3.svg"> <link rel="apple-touch-icon" type="image/png" href="https://static.tildacdn.com/tild6163-3366-4033-b736-393338343464/Frame_4.png"> <link rel="icon" type="image/png" sizes="192x192" href="https://static.tildacdn.com/tild6163-3366-4033-b736-393338343464/Frame_4.png"> <!--/favicons--> <!-- Assets --> <script src="https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js" async charset="utf-8"></script> <link rel="stylesheet" href="https://static.tildacdn.com/css/tilda-grid-3.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';"/> <link rel="stylesheet" href="https://static.tildacdn.com/ws/project13998377/tilda-blocks-page72891569.min.css?t=1788872050" type="text/css" media="all" onerror="this.loaderr='y';" /> <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic" rel="stylesheet"> <script type="text/javascript">TildaFonts=["90001","90002"];</script> <script type="text/javascript" src="https://static.tildacdn.com/js/tilda-fonts.min.js" charset="utf-8" onerror="this.loaderr='y';"></script> <script nomodule src="https://static.tildacdn.com/js/tilda-polyfill-1.0.min.js" charset="utf-8"></script> <script type="text/javascript">function t_onReady(func) {if(document.readyState!='loading') {func();} else {document.addEventListener('DOMContentLoaded',func);}}
+function t_onFuncLoad(funcName,okFunc,time) {if(typeof window[funcName]==='function') {okFunc();} else {setTimeout(function() {t_onFuncLoad(funcName,okFunc,time);},(time||100));}}</script> <script src="https://static.tildacdn.com/js/jquery-1.10.2.min.js" charset="utf-8" onerror="this.loaderr='y';"></script> <script src="https://static.tildacdn.com/js/tilda-scripts-3.0.min.js" charset="utf-8" defer onerror="this.loaderr='y';"></script> <script src="https://static.tildacdn.com/ws/project13998377/tilda-blocks-page72891569.min.js?t=1788872050" charset="utf-8" async onerror="this.loaderr='y';"></script> <script src="https://static.tildacdn.com/js/tilda-lazyload-1.0.min.js" charset="utf-8" async onerror="this.loaderr='y';"></script> <script src="https://static.tildacdn.com/js/tilda-events-1.0.min.js" charset="utf-8" async onerror="this.loaderr='y';"></script> <!-- nominify begin --><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://likovanie-spb.ru/#organization",
+  "name": "Школа танцев «Ликование»",
+  "alternateName": [
+    "Ликование",
+    "Ансамбль танца «Ликование»"
+  ],
+  "url": "https://likovanie-spb.ru/",
+  "description": "Школа танцев «Ликование» в Санкт-Петербурге, Красногвардейский район: занятия для детей от 2,5 лет и взрослых. Народные, классические и современные танцы, боди-балет, танцы народов мира и бережный фитнес.",
+  "logo": {
+    "@type": "ImageObject",
+    "@id": "https://likovanie-spb.ru/#logo",
+    "url": "https://static.tildacdn.com/tild3735-6437-4538-a136-336533653531/spina.png",
+    "contentUrl": "https://static.tildacdn.com/tild3735-6437-4538-a136-336533653531/spina.png",
+    "caption": "Школа танцев «Ликование»"
+  },
+  "image": {
+    "@id": "https://likovanie-spb.ru/#logo"
+  },
+  "telephone": "+79112269282",
+  "priceRange": "₽₽",
+  "currenciesAccepted": "RUB",
+  "paymentAccepted": "Наличные, безналичная оплата",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "проспект Энергетиков, 26",
+    "addressLocality": "Санкт-Петербург",
+    "addressRegion": "Санкт-Петербург",
+    "addressCountry": "RU"
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Санкт-Петербург"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Красногвардейский район"
+    }
+  ],
+  "sameAs": [
+    "https://vk.com/ans.likovanie"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+79112269282",
+    "contactType": "customer service",
+    "areaServed": "RU",
+    "availableLanguage": "ru"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Направления школы танцев «Ликование»",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Танцы для детей от 2,5 лет",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Танцевальные занятия для детей от 2,5 лет",
+          "provider": {
+            "@id": "https://likovanie-spb.ru/#organization"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Народный танец",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Занятия народным танцем",
+          "provider": {
+            "@id": "https://likovanie-spb.ru/#organization"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Классический танец",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Занятия классическим танцем",
+          "provider": {
+            "@id": "https://likovanie-spb.ru/#organization"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Современный танец",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Занятия современным танцем",
+          "provider": {
+            "@id": "https://likovanie-spb.ru/#organization"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Боди-балет для взрослых",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Занятия боди-балетом для взрослых",
+          "provider": {
+            "@id": "https://likovanie-spb.ru/#organization"
+          }
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Бережный фитнес",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Бережный фитнес",
+          "provider": {
+            "@id": "https://likovanie-spb.ru/#organization"
+          }
+        }
+      }
+    ]
+  }
+}
+</script> <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://likovanie-spb.ru/#website",
+      "url": "https://likovanie-spb.ru/",
+      "name": "Школа танцев «Ликование»",
+      "alternateName": "Ликование",
+      "description": "Школа танцев в Санкт-Петербурге для детей от 2,5 лет и взрослых.",
+      "inLanguage": "ru-RU",
+      "publisher": {
+        "@id": "https://likovanie-spb.ru/#organization"
+      },
+      "image": {
+        "@id": "https://likovanie-spb.ru/#logo"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://likovanie-spb.ru/#webpage",
+      "url": "https://likovanie-spb.ru/",
+      "name": "Школа танцев в Красногвардейском районе СПб — «Ликование»",
+      "description": "Школа танцев «Ликование» в СПб: занятия для детей от 2,5 лет и взрослых, народные, классические и современные танцы. Бесплатное пробное занятие.",
+      "inLanguage": "ru-RU",
+      "isPartOf": {
+        "@id": "https://likovanie-spb.ru/#website"
+      },
+      "about": {
+        "@id": "https://likovanie-spb.ru/#organization"
+      },
+      "publisher": {
+        "@id": "https://likovanie-spb.ru/#organization"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://likovanie-spb.ru/#logo"
+      }
+    }
+  ]
+}
+</script><!-- nominify end --><script type="text/javascript">window.dataLayer=window.dataLayer||[];</script> <script type="text/javascript">(function() {var ttt='cebo';var tt='oog';var re=new RegExp("bot|g" + tt + "le|yandex|baidu|bing|msn|duckduckbot|teoma|slurp|crawler|spider|robot|crawling|fa" + ttt + "ok","i");if((re.test(navigator.userAgent))===false&&typeof(sessionStorage)!='undefined'&&sessionStorage.getItem('visited')!=='y'&&document.visibilityState){var style=document.createElement('style');style.type='text/css';style.innerHTML='@media screen and (min-width: 980px) {.t-records {opacity: 0;}.t-records_animated {-webkit-transition: opacity ease-in-out .2s;-moz-transition: opacity ease-in-out .2s;-o-transition: opacity ease-in-out .2s;transition: opacity ease-in-out .2s;}.t-records.t-records_visible {opacity: 1;}}';document.getElementsByTagName('head')[0].appendChild(style);function t_setvisRecs(){var alr=document.querySelectorAll('.t-records');Array.prototype.forEach.call(alr,function(el) {el.classList.add("t-records_animated");});setTimeout(function() {Array.prototype.forEach.call(alr,function(el) {el.classList.add("t-records_visible");});sessionStorage.setItem("visited","y");},400);}
+document.addEventListener('DOMContentLoaded',t_setvisRecs);}})();</script></head> <body class="t-body" style="margin:0;"> <!--allrecords--> <div id="allrecords" class="t-records" data-hook="blocks-collection-content-node" data-tilda-project-id="13998377" data-tilda-page-id="72891569" data-tilda-page-alias="soglasie" data-tilda-formskey="08c0611ace26bb85e45703de13998377" data-tilda-cookie="no" data-tilda-lazy="yes" data-tilda-project-lang="RU" data-tilda-root-zone="com" data-tilda-project-headcode="yes" data-tilda-project-country="RU"> <div id="rec1183933321" class="r t-rec t-rec_pt_135 t-rec_pb_0" style="padding-top:135px;padding-bottom:0px; " data-record-type="33"> <!-- T017 --> <div class="t017"> <div class="t-container t-align_center"> <div class="t-col t-col_10 t-prefix_1"> <h1 class="t017__title t-title t-title_xxs" field="title">Согласие на обработку данных</h1> </div> </div> </div> <style>#rec1183933321 .t017__title{color:#1c1c1c;text-transform:uppercase;}@media screen and (min-width:900px){#rec1183933321 .t017__title{font-size:35px;line-height:1.15;}}</style> </div> <div id="rec1260049501" class="r t-rec" style=" " data-animationappear="off" data-record-type="393"> <!-- T393 --> <div id="nav1260049501marker"></div> <div id="nav1260049501" class="t393 t393__positionfixed " style=" top:20px;bottom:;left:;right:20px; " data-navmarker="nav1260049501marker" data-appearoffset="" data-hideoffset=""> <div class="t393__wrapper"> <a
+class="t-btn t-btnflex t-btnflex_type_button t-btnflex_md t393_btn"
+href="/"><span class="t-btnflex__text">Назад</span> <style>#rec1260049501 .t-btnflex.t-btnflex_type_button{color:#ffffff;background-color:#000000;border-style:solid !important;border-color:#000000 !important;--border-width:0px;border-radius:4px;box-shadow:none !important;text-transform:uppercase;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}</style></a> </div> </div> </div> <div id="rec1183933326" class="r t-rec t-rec_pt_0 t-rec_pb_60" style="padding-top:0px;padding-bottom:60px; " data-record-type="106"> <!-- T004 --> <div class="t004"> <div class="t-container "> <div class="t-col t-col_8 t-prefix_2"> <div field="text" class="t-text t-text_md t004__initial-letter">Отправляя форму на сайте <a href="https://likovanie-spb.ru/" target="_blank" rel="noreferrer noopener" style="color: rgb(28, 28, 28);">https://likovanie-spb.ru</a>, я даю согласие Балашковой Светлане Георгиевне (далее — «Оператор») на обработку моих персональных данных в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».<br />Обрабатываются следующие данные: фамилия, имя, отчество, номер телефона.<br />Цель обработки — запись на уроки танцев и обратная связь.<br />Персональные данные хранятся в электронном виде на защищённых серверах Оператора в течение 3 лет или до момента отзыва согласия.<br />Отозвать согласие можно в любой момент по любым контактам, указанным на сайте <a href="https://likovanie-spb.ru/" target="_blank" rel="noreferrer noopener" style="color: rgb(28, 28, 28);">https://likovanie-spb.ru</a><br />Данные не передаются третьим лицам, за исключением случаев, предусмотренных законодательством РФ.</div> </div> </div> </div> <style>#rec1183933326 .t-text{font-size:14px;}</style> </div> </div> <!--/allrecords--> <!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel " id="tildacopy" data-tilda-sign="13998377#72891569"><a href="https://tilda.cc/" class="t-tildalabel__link"><div class="t-tildalabel__wrapper"><div class="t-tildalabel__txtleft">Made on </div><div class="t-tildalabel__wrapimg"><img src="https://static.tildacdn.com/img/tildacopy.png" class="t-tildalabel__img" fetchpriority="low" alt=""></div><div class="t-tildalabel__txtright">Tilda</div></div></a></div> <!-- Stat --> <!-- Yandex.Metrika counter 104301334 --> <script type="text/javascript" data-tilda-cookie-type="analytics">setTimeout(function(){(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");window.mainMetrikaId='104301334';ym(window.mainMetrikaId,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,params:{__ym:{"ymCms":{"cms":"tilda","cmsVersion":"1.0"}}},ecommerce:"dataLayer"});},2000);</script> <noscript><div><img src="https://mc.yandex.ru/watch/104301334" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter --> <script type="text/javascript">if(!window.mainTracker) {window.mainTracker='tilda';}
+window.tildastatcookie='no';setTimeout(function(){(function(d,w,k,o,g) {var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.key=k;s.id="tildastatscript";s.src=g;if(w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded",f,false);} else {f();}})(document,window,'3580c6a18966bb3ad649b2d864cbe8b5','script','https://static.tildacdn.com/js/tilda-stat-1.0.min.js');},2000);</script> </body> </html>

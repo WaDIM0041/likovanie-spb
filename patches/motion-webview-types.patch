@@ -1,0 +1,11 @@
+diff --git a/packages/framer-motion/src/render/html/supported-elements.ts b/packages/framer-motion/src/render/html/supported-elements.ts
+index 3553be9..2eabbbe 100644
+--- a/packages/framer-motion/src/render/html/supported-elements.ts
++++ b/packages/framer-motion/src/render/html/supported-elements.ts
+@@ -117,5 +117,5 @@ export interface HTMLElements {
+     var: HTMLElement
+     video: HTMLVideoElement
+     wbr: HTMLElement
+-    webview: HTMLWebViewElement
++    webview: HTMLElement
+ }
