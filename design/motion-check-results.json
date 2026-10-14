@@ -1,9 +1,9 @@
 {
-  "checkedAt": "2026-10-14T04:54:43.787Z",
+  "checkedAt": "2026-10-14T05:18:09.555Z",
   "engine": "framer-motion",
   "entrance": {
-    "opacity": 0,
-    "transform": "matrix(1, 0, 0, 1, 0, 18)"
+    "opacity": 0.706556,
+    "transform": "matrix(1, 0, 0, 1, 0, 5.28198)"
   },
   "rapidSelection": "passed",
   "reducedMotionLiveSwitch": "passed",

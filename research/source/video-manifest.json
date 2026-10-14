@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://cdnv.boomstream.com/balancer/87C4XvOe-2yTgYpW0.mp4",
+    "path": "research/videos/1.mp4",
+    "status": "downloaded",
+    "bytes": 34591329
+  },
+  {
+    "url": "https://cdnv.boomstream.com/balancer/czxYDQkh-KcTdjjBG.mp4",
+    "path": "research/videos/2.mp4",
+    "status": "downloaded",
+    "bytes": 4425217
+  },
+  {
+    "url": "https://cdnv.boomstream.com/balancer/MvkBMIlf-KAN4vm6i.mp4",
+    "path": "research/videos/3.mp4",
+    "status": "downloaded",
+    "bytes": 244653
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-10-14T05:21:27.130Z",
+  "teachers": 6,
+  "fullReviews": 6,
+  "gallery": 49,
+  "playableVideos": 3,
+  "scheduleRows": 11,
+  "legalPages": 2,
+  "fullSourceSections": "passed",
+  "localLinks": "passed",
+  "formValidation": "passed",
+  "seo": {
+    "h1": 1,
+    "title": "Школа танцев в Красногвардейском районе СПб — Ликование",
+    "description": "Танцы для детей от 2,5 лет и взрослых в Санкт-Петербурге. Ансамбль Ликование: педагоги, достижения, расписание, цены. Бесплатное пробное занятие.",
+    "lang": "ru",
+    "robots": "noindex,nofollow",
+    "schemas": 2,
+    "background": "radial-gradient(at 12% 12%, rgb(96, 48, 67) 0%, rgb(54, 28, 42) 52%)"
+  },
+  "errors": []
+}

@@ -100,3 +100,11 @@ document.querySelectorAll('.button, [data-age]').forEach(button => {
 });
 window.addEventListener('pagehide', reset);
 document.documentElement.dataset.motionEngine = 'framer-motion';
+document.querySelectorAll('[data-mail-form]').forEach(form => form.addEventListener('submit',event => {
+  event.preventDefault();
+  if (!form.reportValidity()) return;
+  const body = [...new FormData(form)].map(([name,value])=>`${name}: ${value}`).join('\n');
+  const mail = `mailto:ans.likovanie@gmail.com?subject=${encodeURIComponent('Запись в школу танцев Ликование')}&body=${encodeURIComponent(body)}`;
+  form.querySelector('[data-mail-status]').textContent = 'Письмо подготовлено. Отправьте его в почтовом приложении. Если приложение не открылось, позвоните +7 911 226 92 82.';
+  window.location.href = mail;
+}));

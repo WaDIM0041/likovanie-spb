@@ -7,6 +7,7 @@
 - [Прямые конкуренты](docs/competitor-research.md)
 - [Структура, дизайн-концепция и SEO](docs/design-and-seo-proposal.md)
 - [Визуальный прототип главной](design/index.html), [описание и проверки](design/README.md)
+- [Полный перенос материалов донора и проверки](docs/content-transfer.md)
 - [Установка Framer Motion из GitHub](docs/framer-motion-installation.md)
 - Исходные страницы и тексты: `research/source/`
 - Скачанные изображения: `research/assets/`
@@ -15,7 +16,7 @@
 Сайт-источник: https://likovanie-spb.ru/
 GitHub: https://github.com/WaDIM0041/likovanie-spb
 
-Материалы и дизайн-прототип подготовлены для GitHub. Итоговый сайт ещё не опубликован.
+Новая версия с материалами донора открывается через корневой `index.html`. Автоматическая отправка форм пока заменена подготовкой письма и прямыми контактами. Предпросмотр закрыт от индексации; действующий домен пока не перенесён.
 
 ## Воспроизведение сборки motion
 

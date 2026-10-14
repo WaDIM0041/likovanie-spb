@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+# Preview only; production SEO settings belong to likovanie-spb.ru
