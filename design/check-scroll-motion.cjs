@@ -26,7 +26,7 @@ const { chromium } = require(require.resolve('playwright', {
     await page.locator('.stage-banner h1').hover();
     assert.ok(await page.locator('.stage-banner h1').evaluate(el => getComputedStyle(el).textShadow !== 'none'), 'Hero lettering responds visibly to pointer hover');
     assert.equal(await page.locator('.hero-scene-picker button').count(), 3, 'Visitors can explicitly change the opening scene');
-    assert.match(await page.locator('.hero-photo img').getAttribute('src'), /003\.jpg$/);
+    assert.match(await page.locator('.hero-photo img').getAttribute('src'), /041\.jpg$/);
     await page.locator('.hero-scene-picker [data-scene="1"]').click();
     await page.waitForFunction(() => document.querySelectorAll('.hero-photo .scene-transition-image').length === 1);
     assert.ok(await page.locator('.scene-transition-image').evaluate(el => el.getAnimations().some(a => a.playState === 'running')), 'A new scene overlaps and fades in above the current photo');
@@ -37,7 +37,7 @@ const { chromium } = require(require.resolve('playwright', {
     await page.waitForFunction(() => document.querySelector('.hero-photo img').getAttribute('src').endsWith('091.jpg'));
     assert.match(await page.locator('.hero-photo img').getAttribute('src'), /091\.jpg$/, 'Scene control switches to a real ensemble photograph');
     await page.locator('.hero-scene-picker [data-scene="0"]').click();
-    await page.waitForFunction(() => document.querySelector('.hero-photo img').getAttribute('src').endsWith('003.jpg'));
+    await page.waitForFunction(() => document.querySelector('.hero-photo img').getAttribute('src').endsWith('041.jpg'));
     assert.equal(await page.locator('.stage-marquee').count(), 1, 'A moving typographic scene connects the hero to the story');
     assert.ok(await page.locator('.stage-marquee-track > span').first().evaluate(el => el.getBoundingClientRect().width >= innerWidth), 'Each marquee sequence fills the viewport without a loop-end gap');
     assert.ok(await page.locator('.stage-beam').count() >= 2, 'Visible moving stage lights are required');

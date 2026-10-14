@@ -19,6 +19,13 @@ function play(target, frames, options) {
 }
 function reset() {
   ribbonScene.setMotion(false);
+  clearTimeout(autoTimer);
+  sceneRequest++;
+  automaticRequest = 0;
+  requestedScene = activeScene;
+  sceneButtons.forEach(item => item.setAttribute('aria-pressed', String(Number(item.dataset.scene) === activeScene)));
+  transitionImage?.remove();
+  transitionImage = null;
   disposers.splice(0).forEach(stop => stop());
   controls.forEach(control => control.stop());
   controls.clear();
@@ -37,6 +44,7 @@ const entrance = tag('.hero-copy .location, .hero-copy h1, .hero-copy .intro, .h
 const photo = tag('.hero-photo img')[0];
 const stageSection = document.querySelector('.hero');
 const photoCaption = document.querySelector('.hero-photo figcaption');
+photoCaption.dataset.motion = 'true';
 const curtains = ['left', 'right'].map(side => {
   const curtain = document.createElement('div');
   curtain.className = `stage-curtain stage-curtain-${side}`;
@@ -46,7 +54,7 @@ const curtains = ['left', 'right'].map(side => {
 });
 const prefix = location.pathname.includes('/design/') ? '../' : '';
 const scenes = [
-  {src: '003.jpg', alt: 'Артистка ансамбля в народном костюме на сцене', label: 'Сцена'},
+  {src: '041.jpg', alt: 'Артисты ансамбля «Ликование» на сцене на фоне логотипа школы', label: 'Сцена'},
   {src: '002.jpg', alt: 'Ученицы занимаются у хореографического станка', label: 'Занятия'},
   {src: '091.jpg', alt: 'Ансамбль на сцене', label: 'Ансамбль'}
 ];
@@ -65,31 +73,83 @@ scenePicker.setAttribute('aria-label', 'Выберите сцену на гла�
 sceneButtons.forEach(button => scenePicker.append(button));
 stageSection.append(scenePicker);
 let activeScene = 0;
+let requestedScene = 0;
 let sceneRequest = 0;
 let sceneTransition;
 let transitionImage;
-sceneButtons.forEach(button => button.addEventListener('click', async () => {
-  const index = Number(button.dataset.scene);
-  if (index === activeScene) return;
+let autoTimer;
+let automaticRequest = 0;
+let autoPaused = false;
+let sceneVisible = false;
+let sceneEngaged = false;
+const autoplayToggle = document.createElement('button');
+autoplayToggle.type = 'button';
+autoplayToggle.className = 'scene-autoplay-toggle';
+autoplayToggle.setAttribute('aria-pressed', 'false');
+stageSection.append(autoplayToggle);
+function autoplayEligible() {
+  return !autoPaused && !reduced() && !ambientPaused && !document.hidden && sceneVisible && !sceneEngaged;
+}
+function syncAutoplay() {
+  clearTimeout(autoTimer);
+  if (!autoplayEligible() && automaticRequest) {
+    sceneRequest++;
+    automaticRequest = 0;
+    requestedScene = activeScene;
+    sceneTransition?.stop();
+    transitionImage?.remove();
+    transitionImage = null;
+    photoCaption.style.opacity = '1';
+    sceneButtons.forEach(item => item.setAttribute('aria-pressed', String(Number(item.dataset.scene) === activeScene)));
+  }
+  autoplayToggle.disabled = reduced();
+  autoplayToggle.textContent = reduced() ? 'Автосмена выключена' : autoPaused ? 'Включить автосмену' : 'Пауза слайдов';
+  if (autoplayEligible()) {
+    autoTimer = setTimeout(async () => {
+      await showScene((activeScene + 1) % scenes.length, true);
+      syncAutoplay();
+    }, 6000);
+  }
+}
+autoplayToggle.addEventListener('click', () => {
+  autoPaused = !autoPaused;
+  autoplayToggle.setAttribute('aria-pressed', String(autoPaused));
+  syncAutoplay();
+});
+new IntersectionObserver(entries => {
+  sceneVisible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.4;
+  syncAutoplay();
+}, {threshold: [0, 0.4]}).observe(stageSection);
+scenePicker.addEventListener('pointerenter', event => {if (event.pointerType !== 'touch') {sceneEngaged = true; syncAutoplay();}});
+scenePicker.addEventListener('pointerleave', () => {sceneEngaged = scenePicker.contains(document.activeElement); syncAutoplay();});
+scenePicker.addEventListener('focusin', () => {sceneEngaged = true; syncAutoplay();});
+scenePicker.addEventListener('focusout', event => {sceneEngaged = scenePicker.contains(event.relatedTarget); syncAutoplay();});
+async function showScene(index, automatic = false) {
+  if (index === requestedScene) return;
+  requestedScene = index;
   const request = ++sceneRequest;
+  automaticRequest = automatic ? request : 0;
   sceneTransition?.stop();
   transitionImage?.remove();
   transitionImage = null;
-  sceneButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  const next = new Image();
+  next.src = `${prefix}research/assets/${scenes[index].src}`;
+  try {await next.decode();} catch {if (request === sceneRequest) requestedScene = activeScene; return;}
+  if (request !== sceneRequest) return;
+  sceneButtons.forEach(item => item.setAttribute('aria-pressed', String(Number(item.dataset.scene) === index)));
   if (!reduced()) {
-    const next = new Image();
     next.className = 'scene-transition-image';
-    next.src = `${prefix}research/assets/${scenes[index].src}`;
     next.alt = '';
     next.setAttribute('aria-hidden', 'true');
     transitionImage = next;
     photo.parentElement.append(next);
-    sceneTransition = play(next, {opacity: [0, 1], scale: [1.09, 1.04]}, {duration: 0.72, ease});
+    sceneTransition = play(next, {opacity: [0, 1], scale: [1.02, 1]}, {duration: 1.1, ease});
     const captionOut = play(photoCaption, {opacity: [1, 0], y: [0, -5]}, {duration: 0.16, ease});
     await Promise.all([sceneTransition, captionOut]);
   }
   if (request !== sceneRequest) return;
   activeScene = index;
+  automaticRequest = 0;
   photo.src = `${prefix}research/assets/${scenes[index].src}`;
   photo.alt = scenes[index].alt;
   photoCaption.textContent = scenes[index].label;
@@ -97,6 +157,11 @@ sceneButtons.forEach(button => button.addEventListener('click', async () => {
   transitionImage = null;
   if (!reduced()) sceneTransition = play(photoCaption, {opacity: [0, 1], y: [5, 0]}, {duration: 0.32, ease});
   else {photo.style.opacity = '1'; photo.style.transform = 'none'; photoCaption.style.opacity = '1'; photoCaption.style.transform = 'none';}
+}
+sceneButtons.forEach(button => button.addEventListener('click', async () => {
+  clearTimeout(autoTimer);
+  await showScene(Number(button.dataset.scene));
+  syncAutoplay();
 }));
 const awards = tag('.award-list article');
 const detail = tag('.program-detail > div')[0];
@@ -125,6 +190,7 @@ toggle.textContent = reduced() ? 'Включить эффекты' : 'Остан
 document.querySelector('.hero').append(toggle);
 function startAmbience() {
   if (reduced() || ambientPaused || document.hidden) return;
+  syncAutoplay();
   ribbonScene.setMotion(true);
   beams.forEach((beam, index) => {
     const direction = index % 2 ? -1 : 1;
@@ -149,6 +215,8 @@ function startAmbience() {
   }
 }
 function stopAmbience() {
+  clearTimeout(autoTimer);
+  syncAutoplay();
   ribbonScene.setMotion(false);
   ambientControls.forEach(control => { control.stop(); controls.delete(control); });
   ambientControls.clear();
@@ -175,10 +243,11 @@ document.addEventListener('visibilitychange', () => {
 function start() {
   document.documentElement.dataset.motionPreference = manualMotion ? 'manual' : reduced() ? 'off' : 'on';
   ribbonScene.setMotion(!reduced() && !ambientPaused && !document.hidden);
+  syncAutoplay();
   if (reduced()) return;
   startAmbience();
   play(entrance, { opacity: [0, 1], y: [48, 0] }, { duration: 0.85, delay: stagger(0.12), ease });
-  play(photo, { opacity: [0.35, 1], scale: [1.14, 1.08] }, { duration: 1.5, ease });
+  play(photo, { opacity: [0.35, 1], scale: [1.04, 1] }, { duration: 1.5, ease });
   revealGroups.forEach(group => {
     const children = [...group.children];
     disposers.push(inView(children, element => {
@@ -195,14 +264,14 @@ function start() {
   }));
   const headerHeight = Math.round(document.querySelector('header').getBoundingClientRect().height);
   disposers.push(scroll(progress => {
-    parallaxPhoto.style.transform = `translateY(${progress * (narrow.matches ? 35 : 120)}px)`;
+    parallaxPhoto.style.transform = `translateY(${progress * (narrow.matches ? 0 : 120)}px)`;
     stageLights[0].style.transform = `translateY(${progress * -70}px)`;
   }, {target: stageSection, offset: [`start ${headerHeight}px`, `end ${headerHeight}px`]}));
   disposers.push(scroll(progress => {
     const open = 0.38 + Math.max(0, Math.min(1, progress)) * 0.62;
     curtains[0].style.transform = `translateX(${-open * 100}%)`;
     curtains[1].style.transform = `translateX(${open * 100}%)`;
-  }, {target: stageSection, offset: ['start 95%', 'start 55%']}));
+  }, {target: stageSection, offset: ['start 95%', narrow.matches ? 'start 75%' : 'start 55%']}));
 }
 media.addEventListener('change', () => {
   manualMotion = false;

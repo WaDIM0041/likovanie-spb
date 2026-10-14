@@ -13,7 +13,7 @@ const {chromium} = require(require.resolve('playwright', {paths: [process.env.PL
         const el = document.querySelector('.stage-curtain-left');
         return -new DOMMatrix(getComputedStyle(el).transform).m41 / el.getBoundingClientRect().width > .55;
       }, null, {timeout:5000});
-      await page.evaluate(top => scrollTo({top:top - innerHeight * .5,behavior:'instant'}), sceneTop);
+      await page.evaluate(({top,position}) => scrollTo({top:top - innerHeight * position,behavior:'instant'}), {top:sceneTop,position:width < 700 ? .7 : .5});
       await page.waitForFunction(() => {
         const el = document.querySelector('.stage-curtain-left');
         return -new DOMMatrix(getComputedStyle(el).transform).m41 / el.getBoundingClientRect().width >= .99;
