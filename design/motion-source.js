@@ -7,6 +7,8 @@ const controls = new Set();
 const disposers = [];
 const ambientControls = new Set();
 let ambientPaused = false;
+let manualMotion = false;
+function reduced() { return media.matches && !manualMotion; }
 function play(target, frames, options) {
   const control = animate(target, frames, options);
   controls.add(control);
@@ -41,6 +43,7 @@ const stageLights = [...document.querySelectorAll('.hero, .school, .contacts')].
   return light;
 });
 const beams = tag('.stage-beam, .stage-orbit');
+const marquee = tag('.stage-marquee-track')[0];
 const parallaxPhoto = tag('.hero-photo')[0];
 const revealGroups = [...document.querySelectorAll('.section-head, .direction-grid, .teacher-grid, .review-grid, .schedule-grid, .gallery-grid, .video-grid, .achievement-layout, .offer-grid, .enrol-grid')];
 revealGroups.forEach(group => [...group.children].forEach(el => el.dataset.motion = 'true'));
@@ -52,10 +55,10 @@ const toggle = document.createElement('button');
 toggle.className = 'motion-toggle';
 toggle.type = 'button';
 toggle.setAttribute('aria-pressed', 'false');
-toggle.textContent = 'Остановить фон';
+toggle.textContent = reduced() ? 'Включить эффекты' : 'Остановить фон';
 document.querySelector('.hero').append(toggle);
 function startAmbience() {
-  if (media.matches || ambientPaused || document.hidden) return;
+  if (reduced() || ambientPaused || document.hidden) return;
   beams.forEach((beam, index) => {
     const direction = index % 2 ? -1 : 1;
     const control = play(beam, {
@@ -66,12 +69,31 @@ function startAmbience() {
     }, {duration: 12 + index % 3 * 4, repeat: Infinity, ease: 'easeInOut'});
     ambientControls.add(control);
   });
+  if (marquee) {
+    const [sequence, copy] = marquee.children;
+    while (sequence.getBoundingClientRect().width < innerWidth) {
+      sequence.innerHTML += sequence.innerHTML;
+    }
+    copy.innerHTML = sequence.innerHTML;
+    const control = play(marquee, {x: [0, -sequence.getBoundingClientRect().width]}, {
+      duration: 30, repeat: Infinity, ease: 'linear'
+    });
+    ambientControls.add(control);
+  }
 }
 function stopAmbience() {
   ambientControls.forEach(control => { control.stop(); controls.delete(control); });
   ambientControls.clear();
 }
 toggle.addEventListener('click', () => {
+  if (reduced()) {
+    manualMotion = true;
+    ambientPaused = false;
+    toggle.setAttribute('aria-pressed', 'false');
+    toggle.textContent = 'Остановить фон';
+    reset(); start();
+    return;
+  }
   ambientPaused = !ambientPaused;
   toggle.setAttribute('aria-pressed', String(ambientPaused));
   toggle.textContent = ambientPaused ? 'Включить фон' : 'Остановить фон';
@@ -83,7 +105,8 @@ document.addEventListener('visibilitychange', () => {
   startAmbience();
 });
 function start() {
-  if (media.matches) return;
+  document.documentElement.dataset.motionPreference = manualMotion ? 'manual' : reduced() ? 'off' : 'on';
+  if (reduced()) return;
   startAmbience();
   play(entrance, { opacity: [0, 1], y: [48, 0] }, { duration: 0.85, delay: stagger(0.12), ease });
   play(photo, { opacity: [0.35, 1], scale: [1.14, 1.08] }, { duration: 1.5, ease });
@@ -107,6 +130,8 @@ function start() {
   }, {target: document.querySelector('.hero'), offset: ['start start', 'end start']}));
 }
 media.addEventListener('change', () => {
+  manualMotion = false;
+  toggle.textContent = reduced() ? 'Включить эффекты' : ambientPaused ? 'Включить фон' : 'Остановить фон';
   reset();
   const active = document.querySelector('[data-age][aria-pressed="true"]');
   if (active) updateProgram(Number(active.dataset.age));
@@ -136,21 +161,21 @@ document.querySelectorAll('[data-age]').forEach(button => button.addEventListene
   const current = ++selection;
   transition?.stop();
   document.querySelectorAll('[data-age]').forEach(other => other.setAttribute('aria-pressed', String(other === button)));
-  if (!media.matches) {
+  if (!reduced()) {
     transition = play(detail, { opacity: 0, y: -6 }, { duration: 0.12 });
     await transition;
   }
   if (current !== selection) return;
   updateProgram(Number(button.dataset.age));
-  if (media.matches) { detail.style.opacity = '1'; detail.style.transform = 'none'; }
+  if (reduced()) { detail.style.opacity = '1'; detail.style.transform = 'none'; }
   else transition = play(detail, { opacity: [0, 1], y: [8, 0] }, { duration: 0.3, ease });
 }));
 document.querySelectorAll('.button, [data-age]').forEach(button => {
   button.dataset.motion = 'true';
   button.addEventListener('pointerdown', () => {
-    if (!media.matches) play(button, { scale: 0.97 }, { duration: 0.1 });
+    if (!reduced()) play(button, { scale: 0.97 }, { duration: 0.1 });
   });
-  const release = () => { if (!media.matches) play(button, { scale: 1 }, { type: 'spring', stiffness: 450, damping: 30 }); };
+  const release = () => { if (!reduced()) play(button, { scale: 1 }, { type: 'spring', stiffness: 450, damping: 30 }); };
   button.addEventListener('pointerup', release);
   button.addEventListener('pointerleave', release);
   button.addEventListener('pointercancel', release);

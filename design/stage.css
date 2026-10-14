@@ -1,0 +1,173 @@
+/* «От первого движения — к большой сцене»: the published stage composition. */
+.stage-home{--paper:#f6f1e8;--ink:#2b1926;--muted:#796a70;--line:#d7cac3;--gold:#e6bb83;background:var(--paper)}
+.stage-home .preview{background:#180d16;color:#bca9b1;font-size:10px;letter-spacing:.08em;padding:7px 20px}
+.stage-home header{position:sticky;top:0;z-index:12;background:#21111e;color:#f6f1e8;padding:20px 4vw;gap:22px;border-bottom:1px solid #ffffff16}
+.stage-home header .brand{font-family:Georgia,serif;color:#f6f1e8;font-weight:400;font-size:33px;letter-spacing:-1.3px;white-space:nowrap}
+.stage-home header .brand span{color:#bba7b2;font-family:"Segoe UI",sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:.15em}
+.stage-home header .brand-logo{width:24px;height:46px;filter:brightness(0) invert(1);margin-right:10px}
+.stage-home header nav{gap:clamp(10px,1.4vw,24px)}
+.stage-home header nav a{font-size:12px;color:#e8dbe1;position:relative}
+.stage-home header nav a::after{content:"";position:absolute;bottom:-8px;left:0;width:100%;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.stage-home header nav a:hover::after{transform:scaleX(1)}
+.stage-home .header-contact{font-size:12px;color:var(--gold)}
+.stage-home .hero{display:block;min-height:min(850px,calc(100svh - 110px));background:#180b16;color:#fff8f0;isolation:isolate}
+.stage-home .hero-photo{position:absolute;inset:0;margin:0;min-height:0;z-index:0;overflow:hidden;will-change:transform}
+.stage-home .hero-photo img{inset:0;width:100%;height:100%;object-fit:cover;object-position:65% 35%}
+.stage-home .hero-photo::after{inset:0;background:linear-gradient(90deg,rgba(20,8,18,.95) 0%,rgba(31,11,25,.78) 28%,rgba(24,9,19,.15) 70%),linear-gradient(0deg,rgba(22,8,18,.85),transparent 40%);z-index:1}
+.stage-home .hero-photo figcaption{z-index:2;top:25px;bottom:auto;right:4vw;color:#dbc9cc;letter-spacing:.1em;font-size:10px;text-transform:uppercase}
+.stage-home .hero .stage-light{z-index:1;opacity:.6;inset:-20%;mix-blend-mode:screen}
+.stage-home .hero-copy{padding:72px 4vw 120px;max-width:1000px;z-index:2}
+.stage-home .hero .location{display:flex;align-items:center;gap:15px;letter-spacing:.06em;font-size:11px;margin-bottom:30px;color:var(--gold)}
+.stage-home .hero .location::before{content:"";display:block;width:35px;height:1px;background:var(--gold);flex-shrink:0}
+.stage-home .hero h1{font-size:clamp(65px,6.8vw,108px);line-height:.96;letter-spacing:-.055em;font-weight:400;margin-bottom:32px;text-wrap:balance}
+.stage-home .hero .intro{font-size:15px;line-height:1.7;color:#dfcfd7;margin-bottom:28px}
+.stage-home .hero .actions{gap:30px}
+.stage-home .hero .button{background:var(--gold);border-radius:0;padding:18px 25px;color:#281222;font-size:13px;letter-spacing:.01em}
+.stage-home .hero .button::after{content:"↗";margin-left:24px;font-size:18px}
+.stage-home .hero .quiet-link{font-size:12px;color:#f0dedf}
+.stage-home .hero .trial{font-size:11px;color:#b8a6b0;margin-top:14px}
+.stage-home .motion-toggle{left:4vw;bottom:30px;top:auto;right:auto;border-radius:0;border:0;border-bottom:1px solid #ffffff55;padding:5px 0;background:transparent;font-size:10px;color:#d1bcc7;text-transform:uppercase;letter-spacing:.1em}
+.stage-home .hero-scroll{position:absolute;right:4vw;bottom:32px;z-index:3;color:#e9d5c5;font-size:10px;text-transform:uppercase;letter-spacing:.15em;text-decoration:none;display:flex;gap:20px;align-items:center}
+.stage-home .hero-scroll span{font-size:28px;line-height:1}
+.stage-home .hero-wordmark{position:absolute;bottom:-.18em;left:38%;font:400 clamp(90px,13.5vw,215px)/1 Georgia,serif;color:transparent;-webkit-text-stroke:1px #ffffff23;pointer-events:none;z-index:1;letter-spacing:-.07em;white-space:nowrap}
+.stage-marquee{overflow:hidden;background:#ae2037;color:#ffead9;border-block:1px solid #ffffff20;padding:22px 0;user-select:none}
+.stage-marquee-track{display:flex;width:max-content;will-change:transform;font:400 clamp(38px,6vw,80px)/1 Georgia,serif;letter-spacing:-.045em}
+.stage-marquee-track>span{white-space:nowrap;padding-right:45px}
+.stage-marquee-track i{font-style:normal;color:transparent;-webkit-text-stroke:1px #ffead9}
+.stage-marquee-track b{font-weight:400;margin:0 30px;font-size:.6em;color:#e7ba7e}
+.stage-home .section{max-width:none;padding:110px 6vw}
+.stage-home .section-head{margin-bottom:55px;align-items:start;position:relative;gap:50px}
+.stage-home .section-head::before{content:attr(data-act);font:11px/1.6 "Segoe UI",sans-serif;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;min-width:140px;padding-top:14px}
+.stage-home h2{font-size:clamp(40px,4.8vw,75px);line-height:1.02;letter-spacing:-.045em;font-weight:400;text-wrap:balance}
+.stage-home .section-head h2{flex:1;max-width:1000px}
+.stage-home .section-head>p{font-size:13px;line-height:1.7;max-width:260px;padding-top:15px}
+.stage-home #achievements{background:#24131f;color:#faeee2;overflow:hidden}
+.stage-home #achievements .section-head::before{color:var(--gold)}
+.stage-home #achievements .achievement-layout{grid-template-columns:1.05fr 1fr;gap:8vw;align-items:start}
+.stage-home #achievements .achievement-layout figure{position:sticky;top:125px;overflow:hidden}
+.stage-home #achievements .achievement-layout figure img{height:630px;object-position:center;transform:scale(1.03)}
+.stage-home #achievements .award-list{counter-reset:awards}
+.stage-home #achievements .award-list>p{font-size:17px;color:#c8b8c1;margin:0 0 30px;line-height:1.8}
+.stage-home #achievements .award-list article{counter-increment:awards;border-color:#ffffff20;gap:25px;padding:26px 0}
+.stage-home #achievements .award-list article::before{content:counter(awards,decimal-leading-zero);font:12px/1.4 "Segoe UI",sans-serif;color:var(--gold);padding-top:8px}
+.stage-home #achievements .award-symbol{display:none}
+.stage-home #achievements .award-list h3{font:400 clamp(22px,2.2vw,33px)/1.2 Georgia,serif;color:#faeee2;margin:0;letter-spacing:-.03em}
+.stage-home #why{padding-bottom:75px}
+.stage-home #why>.direction-grid{counter-reset:benefits;grid-template-columns:repeat(4,minmax(0,1fr));gap:35px;margin-top:45px}
+.stage-home #why .direction-grid article{counter-increment:benefits;border-top:1px solid #b99e96;padding-top:18px}
+.stage-home #why .direction-grid article::before{content:counter(benefits,decimal-leading-zero);font:12px Georgia,serif;color:var(--red);display:block;margin-bottom:42px}
+.stage-home #why h3{font:400 27px/1.2 Georgia,serif;letter-spacing:-.03em}
+.stage-home #why .direction-grid p{font-size:13px;line-height:1.8}
+.stage-home #programs{background:#e9e0d6;display:grid;grid-template-columns:.65fr 1fr;column-gap:8vw;row-gap:0;overflow:hidden}
+.stage-home #programs .section-head{grid-column:1/-1}
+.stage-home #programs .age-buttons{display:flex;flex-direction:column;gap:0;counter-reset:ages;margin:0;align-self:start;border-top:1px solid #bbaaa1}
+.stage-home #programs .age-buttons button{counter-increment:ages;display:flex;align-items:center;gap:25px;position:relative;border:0;border-bottom:1px solid #bbaaa1;border-radius:0;text-align:left;padding:25px 0;font:400 clamp(26px,2.9vw,42px)/1.2 Georgia,serif;color:#8a7778;background:transparent;transition:color .2s}
+.stage-home #programs .age-buttons button::before{content:counter(ages,decimal-leading-zero);font:11px "Segoe UI",sans-serif;color:inherit;align-self:start;margin-top:8px}
+.stage-home #programs .age-buttons button[aria-pressed=true]{color:var(--red);background:transparent;border-color:#bbaaa1}
+.stage-home #programs .age-buttons button[aria-pressed=true]::after{content:"↗";margin-left:auto;font-size:30px}
+.stage-home #programs .program-detail{display:flex;flex-direction:column-reverse;gap:30px}
+.stage-home #programs .program-detail figure{overflow:hidden}
+.stage-home #programs .program-detail figure img{height:350px;object-position:50% 40%}
+.stage-home #programs .program-detail figcaption{font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding-top:12px}
+.stage-home #programs .program-detail .program-age{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin:0 0 15px}
+.stage-home #programs .program-detail h3{font:400 clamp(32px,3vw,48px)/1.07 Georgia,serif;letter-spacing:-.04em;margin-bottom:20px}
+.stage-home #programs .program-detail>div>p:not(.program-age){font-size:14px;max-width:570px;line-height:1.8}
+.stage-home .button{border-radius:0;padding:16px 25px;font-size:13px}
+.stage-home #directions{padding-top:90px;padding-bottom:90px}
+.stage-home #directions .direction-grid{gap:45px}
+.stage-home #directions .direction-grid article{border-top:1px solid #b99e96}
+.stage-home #directions h3{font:400 32px/1.15 Georgia,serif;letter-spacing:-.03em}
+.stage-home #directions .direction-grid p{font-size:13px;line-height:1.8}
+.stage-home #school{padding:130px 6vw;background:#1c0c19;color:#f8ecd9;overflow:hidden;isolation:isolate}
+.stage-home #school::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#1c0c19ee,#1c0c1980),url('../research/assets/091.jpg') center/cover;z-index:0;opacity:.7}
+.stage-home #school .stage-light{z-index:1;opacity:.65}
+.stage-home #school>:not(.stage-light){z-index:2}
+.stage-home #school .school-note{color:var(--gold);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:35px}
+.stage-home #school h2{font-size:clamp(55px,7.8vw,115px);max-width:1000px;line-height:.98;margin-bottom:65px}
+.stage-home #school .school-columns{gap:10vw;max-width:1050px;margin-left:auto}
+.stage-home #school .school-columns>p{font-size:18px;line-height:1.8;color:#d8c9cc}
+.stage-home #school .school-columns h3{font:400 32px Georgia,serif;color:#f8ecd9}
+.stage-home #school .school-columns>div p{font-size:14px;color:#c9b7c3}
+.stage-home #school .school-columns a{color:var(--gold);font-size:12px;text-decoration:none;border-bottom:1px solid #e6bb8366;padding-bottom:8px}
+.stage-home #teachers>.section-head h2{max-width:1000px}
+.stage-home #teachers>p{margin-left:190px;max-width:700px;font-size:15px;line-height:1.8;color:var(--muted);margin-bottom:50px}
+.stage-home .teacher-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:55px 45px}
+.stage-home .teacher-grid article{display:grid;grid-template-columns:.8fr 1fr;grid-template-rows:auto 1fr;gap:18px 25px;align-items:start;border-top:1px solid var(--line);padding-top:24px}
+.stage-home .teacher-grid article img{grid-row:1/3;height:330px;margin:0;object-position:center top}
+.stage-home .teacher-grid h3{font:400 31px/1.12 Georgia,serif;letter-spacing:-.03em;margin:0}
+.stage-home .teacher-grid p{font-size:12px;line-height:1.8;margin:0;color:var(--muted)}
+.stage-home .teacher-grid article:first-child{grid-column:1/-1;grid-template-columns:.65fr 1fr;gap:20px 6vw}
+.stage-home .teacher-grid article:first-child img{height:470px}
+.stage-home .teacher-grid article:first-child h3{font-size:clamp(38px,4vw,65px);max-width:500px}
+.stage-home .teacher-grid article:first-child p{font-size:16px;max-width:550px;line-height:1.9}
+.stage-home #prices{background:#e7ded4}
+.stage-home .price-grid{gap:0;border-top:1px solid #b69f96;border-bottom:1px solid #b69f96}
+.stage-home .price-grid article{padding:35px 4vw;background:transparent;border:0;border-radius:0;border-right:1px solid #b69f96}
+.stage-home .price-grid article:last-child{border-right:0}
+.stage-home .price-grid article h3{font:400 clamp(38px,4.4vw,65px)/1 Georgia,serif;letter-spacing:-.04em;margin:35px 0 24px;color:var(--red)}
+.stage-home .price-grid article h3 span{font:11px "Segoe UI",sans-serif;letter-spacing:0;display:block;margin-top:12px;color:var(--muted)}
+.stage-home .price-grid article p{font-size:13px}
+.stage-home .offer-grid article{border-color:#b69f96;padding:25px 0}
+.stage-home .offer-grid h3{font:400 40px Georgia,serif;letter-spacing:-.03em}
+.stage-home #schedule .schedule-grid{gap:0 55px}
+.stage-home #schedule .schedule-grid article{border:0;border-top:1px solid var(--line);border-radius:0;padding:30px 0}
+.stage-home #schedule h3{font:400 28px Georgia,serif}
+.stage-home #reviews{background:#e9e0d6}
+.stage-home .review-grid{gap:45px 6vw}
+.stage-home .review-grid article{position:relative;border-top:1px solid #bba99f;padding-top:55px}
+.stage-home .review-grid article::before{content:"“";position:absolute;top:0;left:0;font:70px/1 Georgia,serif;color:var(--red)}
+.stage-home .review-grid blockquote{font-size:14px;line-height:1.9;color:#51404c}
+.stage-home .review-grid h3{font:400 26px Georgia,serif}
+.stage-home #gallery{background:#20101c;color:#f4e5db}
+.stage-home #gallery .section-head::before{color:var(--gold)}
+.stage-home #gallery .gallery-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:180px;gap:10px}
+.stage-home #gallery .gallery-grid a{border-radius:0}
+.stage-home #gallery .gallery-grid a:first-child,.stage-home #gallery .gallery-grid a:nth-child(12n+8){grid-column:span 2;grid-row:span 2}
+.stage-home #gallery .gallery-grid a:nth-child(12n+5){grid-row:span 2}
+.stage-home #gallery .gallery-grid img{width:100%;height:100%;aspect-ratio:auto}
+.stage-home #videos{background:#20101c;color:#f4e5db;padding-top:30px}
+.stage-home #videos .section-head::before{color:var(--gold)}
+.stage-home .video-grid{gap:22px}
+.stage-home .video-grid h3{font:400 26px Georgia,serif;margin-top:20px}
+.stage-home .video-grid a{font-size:11px;color:#bdabb6}
+.stage-home #enrol{background:#a71f36;color:#fff0df}
+.stage-home #enrol .section-head::before{color:#e8bca4}
+.stage-home #enrol h2{max-width:1000px}
+.stage-home .enrol-grid{gap:7vw}
+.stage-home .enrol-grid form{border:0;border-top:1px solid #ffffff55;padding:35px 0;border-radius:0}
+.stage-home .enrol-grid h3{font:400 32px Georgia,serif}
+.stage-home .enrol-grid label{font-size:12px;color:#f7d7ce}
+.stage-home .enrol-grid input:not([type=checkbox]),.stage-home .enrol-grid select{border:0;border-bottom:1px solid #ffffff66;border-radius:0;background:#ffffff0c;color:#fff5ec;padding:14px 12px}
+.stage-home .enrol-grid select option{background:#fffaf2;color:#242226}
+.stage-home .enrol-grid .button{background:var(--gold);color:#361c2a;margin-top:25px}
+.stage-home .enrol-grid .consent,.stage-home .enrol-grid p{font-size:12px;line-height:1.8}
+.stage-home #contacts{background:#180b15;color:#fff0df}
+.stage-home #contacts .section-head::before{color:var(--gold)}
+.stage-home #contacts .contact-grid{gap:8vw}
+.stage-home #contacts .contact-grid h3{font:400 35px Georgia,serif}
+.stage-home #contacts .contact-grid p{font-size:14px;color:#cbb9c4}
+.stage-home footer{background:#180b15;color:#bca8b4;border-top:1px solid #ffffff20;padding:45px 6vw;font-size:11px}
+.stage-home footer .brand{font:400 40px Georgia,serif;color:#fff0df}
+.stage-home footer .brand span{font:11px "Segoe UI",sans-serif;color:#bca8b4}
+@media(min-width:1800px){.stage-home .hero-copy{padding-left:8vw}.stage-home .section{padding-inline:10vw}}
+@media(max-width:1100px){.stage-home header{flex-wrap:wrap;gap:15px}.stage-home header nav{order:3;width:100%;justify-content:space-between}.stage-home .hero{min-height:760px}.stage-home .hero-copy{padding-top:70px}.stage-home .hero h1{font-size:80px}.stage-home .section-head::before{min-width:95px}.stage-home #why>.direction-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stage-home .teacher-grid article{grid-template-columns:1fr;grid-template-rows:auto}.stage-home .teacher-grid article img{grid-row:auto;width:100%;height:400px}.stage-home .teacher-grid article:first-child{grid-template-columns:.9fr 1fr}.stage-home .teacher-grid article:first-child img{grid-row:1/3}.stage-home #teachers>p{margin-left:145px}.stage-home #gallery .gallery-grid{grid-auto-rows:150px}}
+@media(max-width:700px){
+ .stage-home header{padding:16px 5vw;gap:15px}.stage-home header .brand{font-size:27px}.stage-home header .brand-logo{height:37px;width:20px}.stage-home .header-contact{font-size:10px}.stage-home header nav{overflow-x:auto;justify-content:start;gap:22px;flex-wrap:nowrap;scrollbar-width:none;padding-bottom:4px}.stage-home header nav a{font-size:11px;white-space:nowrap}
+ .stage-home .hero{min-height:720px}.stage-home .hero-copy{padding:90px 5vw 100px;width:100%}.stage-home .hero h1{font-size:clamp(48px,10.5vw,72px);letter-spacing:-.055em;line-height:1.03;margin-bottom:30px}.stage-home .hero .location{font-size:9px;gap:10px;margin-bottom:30px}.stage-home .hero .location::before{width:20px}.stage-home .hero .intro{font-size:13px;max-width:320px}.stage-home .hero .actions{gap:22px}.stage-home .hero .button{font-size:12px;padding:16px 20px}.stage-home .hero .quiet-link{font-size:11px}.stage-home .hero-photo img{object-position:67% center}.stage-home .hero-photo::after{background:linear-gradient(90deg,#180b16db,#180b1655),linear-gradient(0deg,#180b16 0%,#180b1644 70%,#180b1644)}.stage-home .hero-photo figcaption{top:20px;right:5vw;font-size:8px}.stage-home .hero .stage-light{opacity:.55}.stage-home .hero-wordmark{left:12%;font-size:105px;bottom:0}.stage-home .hero-scroll{bottom:30px;right:5vw;font-size:8px;gap:12px}.stage-home .motion-toggle{left:5vw;bottom:30px;font-size:9px}.stage-marquee{padding:18px 0}.stage-marquee-track{font-size:44px}.stage-marquee-track b{margin:0 18px}
+ .stage-home .section{padding:70px 6vw}.stage-home .section-head{display:block;margin-bottom:35px}.stage-home .section-head::before{padding:0;margin-bottom:22px;font-size:9px}.stage-home h2{font-size:clamp(36px,9.5vw,48px)}.stage-home .section-head>p{font-size:12px;padding-top:15px;max-width:100%}
+ .stage-home #achievements .achievement-layout{display:block}.stage-home #achievements .achievement-layout figure{position:relative;top:auto;margin-bottom:35px}.stage-home #achievements .achievement-layout figure img{height:400px}.stage-home #achievements .award-list>p{font-size:14px}.stage-home #achievements .award-list h3{font-size:25px}.stage-home #achievements .award-list article{gap:18px;padding:22px 0}
+ .stage-home #why>.direction-grid{gap:25px}.stage-home #why .direction-grid article::before{margin-bottom:22px}.stage-home #why h3{font-size:22px}.stage-home #why .direction-grid p{font-size:12px}.stage-home #why{padding-bottom:55px}
+ .stage-home #programs{display:block}.stage-home #programs .age-buttons{margin-bottom:30px}.stage-home #programs .age-buttons button{font-size:30px;padding:16px 0}.stage-home #programs .age-buttons button::before{margin-top:5px}.stage-home #programs .program-detail{gap:25px}.stage-home #programs .program-detail figure img{height:280px}.stage-home #programs .program-detail h3{font-size:34px}
+ .stage-home #directions{padding-block:70px}.stage-home #directions .direction-grid{gap:25px}.stage-home #directions h3{font-size:27px}
+ .stage-home #school{padding:90px 6vw}.stage-home #school h2{font-size:54px;margin-bottom:40px}.stage-home #school .school-columns{display:block}.stage-home #school .school-columns>p{font-size:16px;margin-bottom:40px}.stage-home #school .school-columns h3{font-size:28px}.stage-home #school .school-note{font-size:9px}
+ .stage-home #teachers>p{margin-left:0;font-size:13px;margin-bottom:35px}.stage-home .teacher-grid{display:block}.stage-home .teacher-grid article,.stage-home .teacher-grid article:first-child{display:block;padding-top:22px;margin-top:35px}.stage-home .teacher-grid article img,.stage-home .teacher-grid article:first-child img{height:380px;margin-bottom:22px}.stage-home .teacher-grid article h3,.stage-home .teacher-grid article:first-child h3{font-size:35px;margin-bottom:14px}.stage-home .teacher-grid article p,.stage-home .teacher-grid article:first-child p{font-size:13px;line-height:1.8}
+ .stage-home .price-grid{display:block}.stage-home .price-grid article{border-right:0;border-bottom:1px solid #b69f96;padding:28px 0}.stage-home .price-grid article:last-child{border-bottom:0}.stage-home .price-grid article h3{font-size:60px;margin:20px 0}.stage-home .offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.stage-home .offer-grid h3{font-size:29px}.stage-home .offer-grid p{font-size:11px}
+ .stage-home #schedule .schedule-grid{display:block}.stage-home .review-grid{display:block}.stage-home .review-grid article{margin-bottom:35px}.stage-home .review-grid blockquote{font-size:13px}.stage-home #gallery .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:140px}.stage-home #gallery .gallery-grid a:first-child,.stage-home #gallery .gallery-grid a:nth-child(12n+8){grid-column:span 2;grid-row:span 2}.stage-home #gallery .gallery-grid a:nth-child(12n+5){grid-row:span 1}.stage-home #videos{padding-top:20px}.stage-home .video-grid{display:block}.stage-home .video-grid article{margin-bottom:30px}
+ .stage-home .enrol-grid{display:block}.stage-home .enrol-grid form{padding:30px 0}.stage-home .enrol-grid form+form{margin-top:35px}.stage-home .enrol-grid h3{font-size:30px}.stage-home #contacts .contact-grid{display:block}.stage-home #contacts .contact-grid>div{margin-top:35px}.stage-home footer{padding:35px 6vw}
+}
+html:has(.stage-home){scroll-padding-top:140px}
+@media(prefers-reduced-motion:reduce){html:not([data-motion-preference="manual"]) .stage-marquee-track{transform:none!important}.stage-home header nav a::after{transition:none}}
+.stage-home header .brand-logo{filter:none}
+.stage-home .hero .button::after{content:"";display:inline-block;width:9px;height:9px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:translateY(-2px)}
+.stage-home #programs .program-detail figure{background:#d7c7ba}
+.stage-home #programs .age-buttons button[aria-pressed=true]::after{content:"";display:block;width:12px;height:12px;border-top:1px solid currentColor;border-right:1px solid currentColor;flex-shrink:0}
