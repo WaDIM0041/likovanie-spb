@@ -211,6 +211,28 @@ html:has(.stage-home){scroll-padding-top:140px}
 .stage-home .hero{min-height:clamp(650px,88svh,900px)}
 .stage-home .hero .hero-wordmark{z-index:3;pointer-events:none}
 .stage-home .hero .hero-scroll{z-index:4}
+@keyframes stage-button-lustre{
+  0%{background-position:140% 0;box-shadow:0 0 12px #e6bb8344,0 8px 24px #ae203722}
+  50%{box-shadow:0 0 24px #ffd58d88,0 8px 30px #e4547a44}
+  100%{background-position:-40% 0;box-shadow:0 0 18px #e4547a66,0 8px 24px #e6bb8344}
+}
+@keyframes stage-image-prism{
+  0%,100%{filter:brightness(1.06) saturate(1.12) hue-rotate(-4deg) drop-shadow(0 0 9px #ffd58d66)}
+  50%{filter:brightness(1.12) saturate(1.2) hue-rotate(8deg) drop-shadow(0 0 16px #e4547a88)}
+}
+@keyframes stage-photo-sheen{
+  from{transform:translateX(-130%) skewX(-18deg)}
+  to{transform:translateX(230%) skewX(-18deg)}
+}
+@media(hover:hover){
+ .stage-home :is(.button,.hero-scene-picker button,[data-age]){background-image:linear-gradient(110deg,transparent 35%,#ffd58d33 44%,#fff5db99 50%,#e4547a44 56%,transparent 65%);background-size:260% 100%;background-position:140% 0}
+ .stage-home :is(.button,.hero-scene-picker button,[data-age]):is(:hover,:focus-visible){animation:stage-button-lustre 1.8s ease-in-out infinite}
+ .stage-home :is(.hero-photo,.achievement-layout figure,.program-detail figure):hover img,
+ .stage-home :is(.gallery-grid a,.teacher-grid article,.review-grid article):hover img{animation:stage-image-prism 2.4s ease-in-out infinite}
+ .stage-home .hero-photo::before,.stage-home .gallery-grid a::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;background:linear-gradient(110deg,transparent 32%,#ffd58d14 43%,#fff4df66 50%,#e4547a24 57%,transparent 68%);transform:translateX(-130%) skewX(-18deg)}
+ .stage-home .gallery-grid a{position:relative}
+ .stage-home .hero-photo:hover::before,.stage-home .gallery-grid a:is(:hover,:focus-visible)::after{opacity:1;animation:stage-photo-sheen 2.2s ease-in-out infinite}
+}
 @media(max-width:700px){
  .stage-home .stage-banner{min-height:500px;padding:68px 6vw 76px}
  .stage-home .stage-banner h1{font-size:clamp(48px,10.5vw,72px);line-height:1.02;margin-bottom:25px}
