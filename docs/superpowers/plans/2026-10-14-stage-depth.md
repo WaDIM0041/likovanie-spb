@@ -62,9 +62,11 @@ Files: `scripts/build-living-frame.sh`, `research/videos/living-frame.mp4`, `res
 - [x] Run stage-depth, ribbon, scene autoplay, curtain timing, scroll-motion, responsive, transferred-content and module checks.
 - [x] Inspect desktop/mobile screenshots and contrast of glass controls.
 - [x] Request an independent code review and resolve important findings.
-- [ ] Commit, push to main, await Pages deployment and repeat behavior checks on the public URL.
+- [x] Commit, push to main, await Pages deployment and repeat behavior checks on the public URL.
 - [x] Update `docs/motion-design.md` with implementation, reproduction commands and measured limits.
 
 Ruling: Localized movement uses the stable rehearsal shot, not the brand-logo animation. The mask is applied in planar RGB so all channels are truly frozen outside the selected performer. A short forward/reverse loop avoids a visible cut.
 
 Independent review: no blocking findings. Delayed Three.js import with reduced motion toggled mid-load, rejected media autoplay, and normal Three/layer initialization passed. A transient 5-second initialization deadline under concurrent browser tests was extended to 20 seconds. Desktop/mobile screenshots and the RGB mask were inspected; the frozen region has a mean RGB difference of 0.041 versus 10.489 inside the moving region between sampled frames.
+
+Publication: implementation commit `11f75e6` was pushed to `main`; Pages workflow `38586868088` completed successfully. `check-stage-depth.cjs` passed against the public HTTPS URL: actual Three renderer, paused/resumed pixels, context-loss fallback, scroll depth, glass controls, living-frame playback/pause, reduced-motion network suppression and mobile layout. The cloud verification transport preserved HTTP range headers for video and used the platform HTTPS trust store. Desktop handoff instructions are in `docs/codex-handoff.md`.
