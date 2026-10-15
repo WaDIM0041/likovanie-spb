@@ -59,7 +59,7 @@
 .stage-marquee-track>span{white-space:nowrap;padding-right:45px}
 .stage-marquee-track i{font-style:normal;color:transparent;-webkit-text-stroke:1px #ffead9}
 .stage-marquee-track b{font-weight:400;margin:0 30px;font-size:.6em;color:#e7ba7e}
-.stage-home .section{max-width:none;padding:110px 6vw}
+.stage-home .section{max-width:none;padding:110px clamp(32px,8vw,150px)}
 .stage-home .section-head{margin-bottom:55px;align-items:start;position:relative;gap:50px}
 .stage-home .section-head::before{content:attr(data-act);font:11px/1.6 "Segoe UI",sans-serif;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;min-width:140px;padding-top:14px}
 .stage-home h2{font-size:clamp(40px,4.8vw,75px);line-height:1.02;letter-spacing:-.045em;font-weight:400;text-wrap:balance}
@@ -102,7 +102,7 @@
 .stage-home #directions .direction-grid article{border-top:1px solid #b99e96}
 .stage-home #directions h3{font:400 32px/1.15 Georgia,serif;letter-spacing:-.03em}
 .stage-home #directions .direction-grid p{font-size:13px;line-height:1.8}
-.stage-home #school{padding:130px 6vw;background:#1c0c19;color:#f8ecd9;overflow:hidden;isolation:isolate}
+.stage-home #school{padding:130px clamp(32px,8vw,150px);background:#1c0c19;color:#f8ecd9;overflow:hidden;isolation:isolate}
 .stage-home #school::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#1c0c19ee,#1c0c1980),url('../research/assets/091.jpg') center/cover;z-index:0;opacity:.7}
 .stage-home #school .stage-light{z-index:1;opacity:.65}
 .stage-home #school>:not(.stage-light){z-index:2}
@@ -222,7 +222,7 @@
 @media(max-width:700px){
  .stage-home header{padding:16px 5vw;gap:15px}.stage-home header .brand{font-size:27px}.stage-home header .brand-logo{height:37px;width:20px}.stage-home .header-contact{font-size:10px}.stage-home header nav{overflow-x:auto;justify-content:start;gap:22px;flex-wrap:nowrap;scrollbar-width:none;padding-bottom:4px}.stage-home header nav a{font-size:11px;white-space:nowrap}
  .stage-home .hero{min-height:720px}.stage-home .hero-copy{padding:90px 5vw 100px;width:100%}.stage-home .hero h1{font-size:clamp(48px,10.5vw,72px);letter-spacing:-.055em;line-height:1.03;margin-bottom:30px}.stage-home .hero .location{font-size:9px;gap:10px;margin-bottom:30px}.stage-home .hero .location::before{width:20px}.stage-home .hero .intro{font-size:13px;max-width:320px}.stage-home .hero .actions{gap:22px}.stage-home .hero .button{font-size:12px;padding:16px 20px}.stage-home .hero .quiet-link{font-size:11px}.stage-home .hero-photo img{object-position:67% center}.stage-home .hero-photo::after{background:linear-gradient(90deg,#180b16db,#180b1655),linear-gradient(0deg,#180b16 0%,#180b1644 70%,#180b1644)}.stage-home .hero-photo figcaption{top:20px;right:5vw;font-size:8px}.stage-home .hero .stage-light{opacity:.55}.stage-home .hero-wordmark{left:12%;font-size:105px;bottom:0}.stage-home .hero-scroll{bottom:30px;right:5vw;font-size:8px;gap:12px}.stage-home .motion-toggle{left:5vw;bottom:30px;font-size:9px}.stage-home .hero-scene-picker{left:5vw;right:auto;bottom:78px;gap:4px}.stage-home .hero-scene-picker button{min-height:38px;padding:0 10px;font-size:8px}.stage-marquee{padding:18px 0}.stage-marquee-track{font-size:44px}.stage-marquee-track b{margin:0 18px}
- .stage-home .section{padding:70px 6vw}.stage-home .section-head{display:block;margin-bottom:35px}.stage-home .section-head::before{padding:0;margin-bottom:22px;font-size:9px}.stage-home h2{font-size:clamp(36px,9.5vw,48px)}.stage-home .section-head>p{font-size:12px;padding-top:15px;max-width:100%}
+ .stage-home .section{padding:70px 8vw}.stage-home .section-head{display:block;margin-bottom:35px}.stage-home .section-head::before{padding:0;margin-bottom:22px;font-size:9px}.stage-home h2{font-size:clamp(36px,9.5vw,48px)}.stage-home .section-head>p{font-size:12px;padding-top:15px;max-width:100%}
  .stage-home #achievements .achievement-layout{display:block}.stage-home #achievements .achievement-layout figure{position:relative;top:auto;margin-bottom:35px}.stage-home #achievements .achievement-layout figure img{height:400px}.stage-home #achievements .award-list>p{font-size:14px}.stage-home #achievements .award-list h3{font-size:25px}.stage-home #achievements .award-list article{gap:18px;padding:22px 0}
  .stage-home #why>.direction-grid{gap:25px}.stage-home #why .direction-grid article::before{margin-bottom:22px}.stage-home #why h3{font-size:22px}.stage-home #why .direction-grid p{font-size:12px}.stage-home #why{padding-bottom:55px}
  .stage-home #programs{display:block}.stage-home #programs .age-buttons{margin-bottom:30px}.stage-home #programs .age-buttons button{font-size:30px;padding:16px 18px}.stage-home #programs .age-buttons button::before{margin-top:5px}.stage-home #programs .program-detail{gap:25px}.stage-home #programs .program-detail figure img{height:280px}.stage-home #programs .program-detail h3{font-size:34px}
