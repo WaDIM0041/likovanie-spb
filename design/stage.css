@@ -327,3 +327,8 @@ html:has(.stage-home){scroll-padding-top:140px}
  .stage-home .hero-scroll{display:none}
  .stage-home .scene-autoplay-toggle{right:5vw;bottom:28px;max-width:45%;font-size:9px}
 }
+
+.stage-home .stage-curtain-left{animation:stage-curtain-open-left 1.7s cubic-bezier(.22,1,.36,1) 900ms both}
+.stage-home .stage-curtain-right{animation:stage-curtain-open-right 1.7s cubic-bezier(.22,1,.36,1) 900ms both}
+@keyframes stage-curtain-open-left{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@keyframes stage-curtain-open-right{from{transform:translateX(0)}to{transform:translateX(100%)}}
