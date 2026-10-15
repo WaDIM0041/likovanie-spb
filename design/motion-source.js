@@ -56,6 +56,7 @@ const curtains = ['left', 'right'].map(side => {
   return curtain;
 });
 const prefix = location.pathname.includes('/design/') ? '../' : '';
+const photoWebp = document.querySelector('.hero-photo source[type="image/webp"]');
 const scenes = [
   {src: '041.jpg', alt: 'Артисты ансамбля «Ликование» на сцене на фоне логотипа школы', label: 'Сцена'},
   {src: '002.jpg', alt: 'Ученицы занимаются у хореографического станка', label: 'Занятия'},
@@ -135,9 +136,13 @@ async function showScene(index, automatic = false) {
   sceneTransition?.stop();
   transitionImage?.remove();
   transitionImage = null;
+  const jpegSrc = `${prefix}research/assets/${scenes[index].src}`;
   const next = new Image();
-  next.src = `${prefix}research/assets/${scenes[index].src}`;
-  try {await next.decode();} catch {if (request === sceneRequest) requestedScene = activeScene; return;}
+  next.src = jpegSrc.replace(/\.jpg$/, '.webp');
+  try {await next.decode();} catch {
+    next.src = jpegSrc;
+    try {await next.decode();} catch {if (request === sceneRequest) requestedScene = activeScene; return;}
+  }
   if (request !== sceneRequest) return;
   sceneButtons.forEach(item => item.setAttribute('aria-pressed', String(Number(item.dataset.scene) === index)));
   if (!reduced()) {
@@ -153,7 +158,8 @@ async function showScene(index, automatic = false) {
   if (request !== sceneRequest) return;
   activeScene = index;
   automaticRequest = 0;
-  photo.src = `${prefix}research/assets/${scenes[index].src}`;
+    photoWebp.srcset = jpegSrc.replace(/\.jpg$/, '.webp');
+    photo.src = jpegSrc;
   photo.alt = scenes[index].alt;
   photoCaption.textContent = scenes[index].label;
   transitionImage?.remove();

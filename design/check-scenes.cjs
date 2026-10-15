@@ -34,7 +34,7 @@ const {chromium}=require(require.resolve('playwright',{paths:[process.env.PLAYWR
    window.holdScene=true;
    HTMLImageElement.prototype.decode=function(){
     const ready=decode.call(this);
-    return window.holdScene&&this.src.endsWith('/002.jpg')?ready.then(()=>new Promise(resolve=>{window.sceneWaiting=true;window.releaseScene=resolve;})):ready;
+    return window.holdScene&&/\/002\.(?:webp|jpg)$/.test(this.src)?ready.then(()=>new Promise(resolve=>{window.sceneWaiting=true;window.releaseScene=resolve;})):ready;
    };
   });
   await delayed.goto(process.env.SITE_URL||'http://127.0.0.1:8000/');
