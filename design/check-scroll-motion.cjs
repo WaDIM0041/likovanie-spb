@@ -17,10 +17,12 @@ const { chromium } = require(require.resolve('playwright', {
     assert.equal(await page.locator('.hero h1').count(), 0, 'The curtain scene is visually separate from the main banner');
     assert.ok(await page.locator('.hero-photo').evaluate(el => el.getBoundingClientRect().width >= document.querySelector('.hero').getBoundingClientRect().width - 1), 'The stage photograph fills the hero, instead of a conventional two-column card');
     assert.equal(await page.locator('.stage-curtain').count(), 2, 'The opening photograph is framed by animated stage curtains');
-    const curtainAtTop = await page.locator('.stage-curtain-left').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m41);
+    await page.waitForFunction(() => {
+      const el = document.querySelector('.stage-curtain-left');
+      return -new DOMMatrix(getComputedStyle(el).transform).m41 / el.getBoundingClientRect().width >= .99;
+    }, null, {timeout: 7000});
     const stageEntry = await page.evaluate(() => document.querySelector('.hero').getBoundingClientRect().top + scrollY - document.querySelector('header').getBoundingClientRect().height + 40);
     await page.evaluate(top => scrollTo({top, behavior: 'instant'}), stageEntry);
-    await page.waitForFunction(start => new DOMMatrix(getComputedStyle(document.querySelector('.stage-curtain-left')).transform).m41 < start - 10, curtainAtTop);
     await page.locator('.hero-photo').hover({position: {x: 1200, y: 500}});
     assert.ok(await page.locator('.hero-photo img').evaluate(el => getComputedStyle(el).filter !== 'none'), 'The opening photo responds visibly to pointer hover');
     await page.locator('.stage-banner h1').hover();
@@ -50,12 +52,11 @@ const { chromium } = require(require.resolve('playwright', {
     await page.locator('.motion-toggle').click();
     assert.ok(await beam.evaluate(el => el.getAnimations().some(a => a.playState === 'running')), 'Background resumes');
     await page.waitForFunction(() => Number(getComputedStyle(document.querySelector('h1')).opacity) === 1);
-    const curtainStart = curtainAtTop;
     const revealPoint = stageEntry + 160;
     await page.evaluate(top => scrollTo({top, behavior: 'instant'}), revealPoint);
-    await page.waitForFunction(start => new DOMMatrix(getComputedStyle(document.querySelector('.stage-curtain-left')).transform).m41 < start - 10, curtainStart);
-    const curtainReveal = await page.locator('.stage-curtain-left').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m41);
-    assert.ok(curtainReveal < curtainStart, 'Ordinary scrolling parts the stage curtains around the photograph');
+    assert.ok(await page.locator('.stage-curtain-left').evaluate(el =>
+      -new DOMMatrix(getComputedStyle(el).transform).m41 / el.getBoundingClientRect().width >= .99),
+    'Published automatic curtain remains open while scrolling');
     const parallaxPoint = await page.evaluate(() => document.querySelector('.hero').getBoundingClientRect().top + scrollY - document.querySelector('header').getBoundingClientRect().height + 350);
     await page.evaluate(top => scrollTo({top, behavior: 'instant'}), parallaxPoint);
     await page.waitForFunction(() => {

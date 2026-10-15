@@ -10,10 +10,10 @@ export function createWebGLRibbon(canvas) {
   const scene=new Scene();const camera=new PerspectiveCamera(40,1,.1,30);camera.position.set(0,.1,8.5);
   const pmrem=new PMREMGenerator(renderer);const room=new RoomEnvironment();
   const environment=pmrem.fromScene(room,.04).texture;scene.environment=environment;room.dispose();pmrem.dispose();
-  scene.add(new HemisphereLight(0xfff4de,0x673b56,2));
-  const key=new DirectionalLight(0xffead0,4);key.position.set(-3,5,4);scene.add(key);
-  const fill=new DirectionalLight(0xffb4d4,2);fill.position.set(4,0,3);scene.add(fill);
-  const rim=new DirectionalLight(0xcad6ff,3);rim.position.set(1,3,-3);scene.add(rim);
+  scene.add(new HemisphereLight(0xffffff,0x111111,2));
+  const key=new DirectionalLight(0xffffff,4);key.position.set(-3,5,4);scene.add(key);
+  const fill=new DirectionalLight(0xffffff,2);fill.position.set(4,0,3);scene.add(fill);
+  const rim=new DirectionalLight(0xffffff,3);rim.position.set(1,3,-3);scene.add(rim);
   const group=new Group();scene.add(group);
   const segments=168,strips=12,tau=Math.PI*2;
   const positions=new Float32Array((segments+1)*(strips+1)*3);
@@ -27,7 +27,7 @@ export function createWebGLRibbon(canvas) {
   geometry.setAttribute('color',new BufferAttribute(colors,3).setUsage(DynamicDrawUsage));
   const material=new MeshStandardMaterial({vertexColors:true,metalness:.62,roughness:.27,side:DoubleSide,envMapIntensity:1.7});
   const mesh=new Mesh(geometry,material);mesh.frustumCulled=false;group.add(mesh);
-  const pink=new Color('#cf397f'),gold=new Color('#f4b660'),tint=new Color();
+  const pink=new Color('#f58220'),gold=new Color('#00a6a6'),tint=new Color();
   const tangent=new Vector3(),side=new Vector3(),normal=new Vector3(),across=new Vector3(),bend=new Vector3();
   const curve=(t,phase)=>{
     const r=1.65+.64*Math.cos(3*t+Math.sin(phase*.23)*.25);
@@ -35,14 +35,14 @@ export function createWebGLRibbon(canvas) {
   };
   const sparkPositions=new Float32Array(34*3);const sparksGeometry=new BufferGeometry();
   sparksGeometry.setAttribute('position',new BufferAttribute(sparkPositions,3));
-  const sparks=new Points(sparksGeometry,new PointsMaterial({color:0xca865f,size:.035,transparent:true,opacity:.6,depthWrite:false}));scene.add(sparks);
+  const sparks=new Points(sparksGeometry,new PointsMaterial({color:0xf58220,size:.035,transparent:true,opacity:.6,depthWrite:false}));scene.add(sparks);
   for(let i=0;i<3;i++){
     const points=[];for(let j=0;j<96;j++){const a=j/96*tau;points.push(new Vector3(Math.cos(a)*(2.6+i*.25),Math.sin(a)*(.8+i*.15),-.5));}
-    const ring=new LineLoop(new BufferGeometry().setFromPoints(points),new LineBasicMaterial({color:0xae7982,transparent:true,opacity:.15}));ring.rotation.z=-.35;scene.add(ring);
+    const ring=new LineLoop(new BufferGeometry().setFromPoints(points),new LineBasicMaterial({color:0xf58220,transparent:true,opacity:.15}));ring.rotation.z=-.35;scene.add(ring);
   }
   const shadowCanvas=document.createElement('canvas');shadowCanvas.width=128;shadowCanvas.height=64;
   const ctx=shadowCanvas.getContext('2d');
-  if(ctx){const g=ctx.createRadialGradient(64,32,1,64,32,64);g.addColorStop(0,'#68213f50');g.addColorStop(1,'#68213f00');ctx.fillStyle=g;ctx.fillRect(0,0,128,64);
+  if(ctx){const g=ctx.createRadialGradient(64,32,1,64,32,64);g.addColorStop(0,'#11111150');g.addColorStop(1,'#11111100');ctx.fillStyle=g;ctx.fillRect(0,0,128,64);
     const shadow=new Sprite(new SpriteMaterial({map:new CanvasTexture(shadowCanvas),transparent:true,depthWrite:false}));shadow.position.set(0,-2.35,-.6);shadow.scale.set(4,.7,1);scene.add(shadow);
   }
   return {

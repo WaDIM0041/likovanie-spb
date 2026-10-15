@@ -63,13 +63,13 @@ export function createRibbonScene(banner) {
       return [cx + p[0]*size*scale, cy - p[1]*size*scale, p[2]];
     };
     const shadow = ctx.createRadialGradient(cx, height*.81, 0, cx, height*.81, width*.34);
-    shadow.addColorStop(0, '#69203d25'); shadow.addColorStop(1, '#69203d00');
+    shadow.addColorStop(0, '#11111125'); shadow.addColorStop(1, '#11111100');
     ctx.save(); ctx.translate(0, height*.81); ctx.scale(1,.2); ctx.translate(0,-height*.81);
     ctx.fillStyle = shadow; ctx.fillRect(0, -height*3, width, height*8); ctx.restore();
 
     // Fine orbital paths give the sculpture scale without covering the typography.
     ctx.save(); ctx.translate(cx, cy); ctx.rotate(-.36);
-    ctx.lineWidth = .6; ctx.strokeStyle = '#9f59632b';
+    ctx.lineWidth = .6; ctx.strokeStyle = '#f582202b';
     for (let i=0; i<3; i++) {
       ctx.beginPath(); ctx.ellipse(0,0,width*(.34+i*.035),height*(.13+i*.025),0,0,tau); ctx.stroke();
     }
@@ -110,9 +110,9 @@ export function createRibbonScene(banner) {
         const diffuse=Math.max(0,n.reduce((sum,v,k)=>sum+v*light[k],0));
         const highlight=Math.pow(diffuse,14)*.8;
         const blend=.5+.5*Math.sin(i/steps*tau*1.5+phase*.24);
-        const base=mix([199,39,100],[245,163,66],blend);
-        const shaded=mix([65,17,49],base,.3+diffuse*.7);
-        const color=mix(shaded,[255,248,216],highlight);
+        const base=mix([245,130,32],[0,166,166],blend);
+        const shaded=mix([82,35,0],base,.3+diffuse*.7);
+        const color=mix(shaded,[255,255,255],highlight);
         faces.push({points:[a.screen,b.screen,c.screen,d.screen],z:(a.p[2]+b.p[2]+c.p[2]+d.p[2])/4,color:`rgb(${color.map(Math.round).join(',')})`});
       }
     }
@@ -128,11 +128,11 @@ export function createRibbonScene(banner) {
       const radius=2.65+(i%5)*.12+pulse*.3;
       const p=project(rotate([Math.cos(angle)*radius,Math.sin(angle)*2.4,Math.sin(angle*2)*.7],-.3,.15));
       const alpha=(.25+.35*Math.sin(i+phase)**2)*unfold;
-      ctx.fillStyle=`rgba(${i%2?'218,119,57':'160,43,91'},${alpha})`;
+      ctx.fillStyle=`rgba(${i%2?'0,166,166':'245,130,32'},${alpha})`;
       ctx.beginPath();ctx.arc(p[0],p[1],i%6===0?2.1:1,0,tau);ctx.fill();
     }
     if(pulse>.02) {
-      ctx.strokeStyle=`rgba(188,64,98,${pulse*.3})`;ctx.lineWidth=1;
+      ctx.strokeStyle=`rgba(245,130,32,${pulse*.3})`;ctx.lineWidth=1;
       ctx.beginPath();ctx.ellipse(cx,cy,width*(.29+(1-pulse)*.15),height*(.25+(1-pulse)*.12),-.35,0,tau);ctx.stroke();
     }
   }

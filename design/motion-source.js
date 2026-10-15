@@ -253,7 +253,15 @@ function start() {
   if (reduced()) return;
   startAmbience();
   play(entrance, { opacity: [0, 1], y: [48, 0] }, { duration: 0.85, delay: stagger(0.12), ease });
-  play(photo, { opacity: [0.35, 1], scale: [1.04, 1] }, { duration: 1.5, ease });
+  // Preserve the published reveal: wait for the photograph, then open over 2.2s.
+  const revealPhoto = () => {
+    play(photo, { opacity: [0.35, 1], scale: [1.04, 1] }, { duration: 1.5, ease }).then(() => {
+      play(curtains[0], {x: ['0%', '-100%']}, {duration: 2.2, ease});
+      play(curtains[1], {x: ['0%', '100%']}, {duration: 2.2, ease});
+    });
+  };
+  if (photo.complete && photo.naturalWidth) revealPhoto();
+  else photo.addEventListener('load', revealPhoto, {once: true});
   revealGroups.forEach(group => {
     const children = [...group.children];
     disposers.push(inView(children, element => {
@@ -273,11 +281,6 @@ function start() {
     parallaxPhoto.style.transform = `translateY(${progress * (narrow.matches ? 0 : 120)}px)`;
     stageLights[0].style.transform = `translateY(${progress * -70}px)`;
   }, {target: stageSection, offset: [`start ${headerHeight}px`, `end ${headerHeight}px`]}));
-  disposers.push(scroll(progress => {
-    const open = 0.38 + Math.max(0, Math.min(1, progress)) * 0.62;
-    curtains[0].style.transform = `translateX(${-open * 100}%)`;
-    curtains[1].style.transform = `translateX(${open * 100}%)`;
-  }, {target: stageSection, offset: ['start 95%', narrow.matches ? 'start 75%' : 'start 55%']}));
 }
 media.addEventListener('change', () => {
   manualMotion = false;
