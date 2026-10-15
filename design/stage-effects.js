@@ -1,6 +1,8 @@
 import {scroll} from 'framer-motion/dom';
+import {createScrollSpotlights} from './scroll-spotlights.js';
 
 export function createStageEffects() {
+  const spotlights = createScrollSpotlights();
   const layers=[];
   for(const selector of ['.stage-banner','#teachers','#gallery']) {
     const section=document.querySelector(selector);
@@ -36,6 +38,7 @@ export function createStageEffects() {
   }
   return {setMotion(enabled) {
     active=enabled;
+    spotlights.setMotion(enabled);
     stops.splice(0).forEach(stop=>stop());
     layers.forEach(({section,elements})=>{
       elements.forEach(el=>{el.style.transform='none';});
