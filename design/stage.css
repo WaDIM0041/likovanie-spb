@@ -369,3 +369,9 @@ html:has(.stage-home){scroll-padding-top:140px}
 }
 
 .stage-home #videos figcaption,.stage-home #videos .video-grid a,.stage-home footer>a:last-child{color:#d9d9d9}
+
+/* Curtain retains the school's turquoise color. */
+/* Turquoise fabric: folds use lighter and darker values of the same hue. */
+.stage-home .stage-curtain{background:repeating-linear-gradient(90deg,transparent 0 7%,#003f3f38 7.5% 9%,transparent 10% 17%),linear-gradient(90deg,#004747 0%,#00a6a6 13%,#007b7b 25%,#46cccc 39%,#006666 52%,#00a6a6 68%,#006060 82%,#27baba 95%,#003f3f 100%);box-shadow:0 0 42px #111111aa,inset -14px 0 24px #ffffff55,inset 7px 0 15px #ffffff33}
+.stage-home .stage-curtain-left{border-right-color:#00a6a6}
+.stage-home .stage-curtain-right{background:repeating-linear-gradient(90deg,transparent 0 7%,#003f3f38 7.5% 9%,transparent 10% 17%),linear-gradient(90deg,#004747 0%,#00a6a6 13%,#007b7b 25%,#46cccc 39%,#006666 52%,#00a6a6 68%,#006060 82%,#27baba 95%,#003f3f 100%);border-left-color:#00a6a6;box-shadow:0 0 42px #111111aa,inset 14px 0 24px #ffffff55,inset -7px 0 15px #ffffff33}
