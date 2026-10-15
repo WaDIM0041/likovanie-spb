@@ -367,3 +367,5 @@ html:has(.stage-home){scroll-padding-top:140px}
  .stage-home :is(#achievements,#school,#gallery,#videos,#contacts) a:not(.button):hover{color:#f58220}
  .stage-home #enrol a:not(.button):hover{color:#111111}
 }
+
+.stage-home #videos figcaption,.stage-home #videos .video-grid a,.stage-home footer>a:last-child{color:#d9d9d9}
