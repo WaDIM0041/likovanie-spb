@@ -11,7 +11,7 @@ const controls = new Set();
 const disposers = [];
 const ambientControls = new Set();
 let ambientPaused = false;
-let manualMotion = false;
+let manualMotion = true;
 function reduced() { return media.matches && !manualMotion; }
 function play(target, frames, options) {
   const control = animate(target, frames, options);
@@ -289,7 +289,6 @@ function start() {
   }, {target: stageSection, offset: [`start ${headerHeight}px`, `end ${headerHeight}px`]}));
 }
 media.addEventListener('change', () => {
-  manualMotion = false;
   toggle.textContent = reduced() ? 'Включить эффекты' : ambientPaused ? 'Включить фон' : 'Остановить фон';
   reset();
   const active = document.querySelector('[data-age][aria-pressed="true"]');

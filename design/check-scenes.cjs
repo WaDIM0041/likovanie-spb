@@ -47,8 +47,12 @@ const {chromium}=require(require.resolve('playwright',{paths:[process.env.PLAYWR
   await delayed.locator('.hero-scene-picker [data-scene="1"]').click();
   await delayed.locator('.scene-transition-image').waitFor();
   await delayed.emulateMedia({reducedMotion:'reduce'});
-  await delayed.waitForFunction(()=>document.documentElement.dataset.motionPreference==='off');
-  assert.equal(await delayed.locator('.hero-scene-picker [data-scene="0"]').getAttribute('aria-pressed'),'true','Cancelling a transition restores the selected button to the visible image');
+  await delayed.waitForFunction(()=>document.documentElement.dataset.motionPreference==='manual');
+  const visibleScene = await delayed.locator('.hero-photo img').first().evaluate(image => {
+    const scene = {'041.jpg': '0', '002.jpg': '1', '091.jpg': '2'}[image.getAttribute('src').split('/').pop()];
+    return {scene, selected: document.querySelector('.hero-scene-picker [aria-pressed="true"]')?.dataset.scene};
+  });
+  assert.equal(visibleScene.selected, visibleScene.scene, 'Cancelling a transition keeps the selected button aligned with the visible image');
   assert.deepEqual(errors,[]);
   console.log('Passed: compact mobile stage, full photo container, automatic scenes, pause, manual selection, offscreen suspension, mobile overflow');
  }finally{await browser.close();}

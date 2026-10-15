@@ -72,21 +72,18 @@ const { chromium } = require(require.resolve('playwright', {
     });
     assert.ok(await beam.evaluate(el => el.getAnimations().some(a => a.playState === 'running')), 'Returning to a cached page restarts background movement');
     await page.emulateMedia({reducedMotion: 'reduce'});
-    assert.equal(await page.locator('[data-motion]').evaluateAll(els => els.every(el => Number(getComputedStyle(el).opacity) === 1 && getComputedStyle(el).transform === 'none')), true, 'Reduced motion restores content');
-    await page.waitForFunction(() => document.querySelectorAll('.stage-beam').length === [...document.querySelectorAll('.stage-beam')].filter(el => el.getAnimations().every(a => a.playState !== 'running')).length, null, {timeout: 3000});
-    assert.equal(await page.locator('.stage-beam').evaluateAll(els => els.flatMap(el => el.getAnimations()).filter(a => a.playState === 'running').length), 0);
+    assert.equal(await page.evaluate(() => document.documentElement.dataset.motionPreference), 'manual', 'Site effects override the system reduction setting by default');
+    await page.waitForFunction(() => document.querySelector('.hero .stage-beam').getAnimations().some(a => a.playState === 'running'));
     for (const width of [390, 320]) {
       await page.setViewportSize({width, height: 844});
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'No horizontal overflow');
     }
     await page.evaluate(() => scrollTo({top: 0, behavior: 'instant'}));
-    await page.locator('.motion-toggle').click();
-    await page.waitForFunction(() => document.querySelector('.hero .stage-beam').getAnimations().some(a => a.playState === 'running'));
-    assert.equal(await page.locator('.motion-toggle').textContent(), 'Остановить фон', 'The visitor can explicitly enable movement when the system reduces it');
+    assert.equal(await page.locator('.motion-toggle').textContent(), 'Остановить фон', 'The visitor sees enabled effects by default');
     await page.emulateMedia({reducedMotion: 'no-preference'});
     await page.evaluate(() => scrollTo({top: 0, behavior: 'instant'}));
     await page.waitForFunction(() => document.querySelector('.hero .stage-beam').getAnimations().some(a => a.playState === 'running'));
     assert.deepEqual(errors, []);
-    console.log('Passed: moving background, pause/resume, scroll parallax, section reveal, progress, reduced motion, mobile overflow, JS errors');
+    console.log('Passed: moving background, pause/resume, scroll parallax, section reveal, progress, enabled-by-default effects, mobile overflow, JS errors');
   } finally { await browser.close(); }
 })().catch(error => {console.error(error); process.exitCode = 1;});

@@ -73,7 +73,7 @@ const {chromium} = require(require.resolve('playwright', {
     const reduced = await angles();
     await page.evaluate(top => scrollTo({top, behavior: 'instant'}), positions[1]);
     await page.waitForTimeout(300);
-    assert.deepEqual(await angles(), reduced, 'Reduced motion stops scroll-driven lights');
+    assert.notDeepEqual(await angles(), reduced, 'Effects stay enabled when the system requests reduced motion');
     for (const width of [700,390,320]) {
       await page.setViewportSize({width,height:844});
       assert.equal(await page.locator('#gallery .scroll-spotlight').evaluateAll(els => els.filter(el => getComputedStyle(el).display !== 'none').length), 2, 'Mobile uses only two visible cones');

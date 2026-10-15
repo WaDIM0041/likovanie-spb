@@ -23,18 +23,10 @@ const {chromium}=require(require.resolve('playwright',{paths:[process.env.PLAYWR
   await page.waitForFunction(()=>{const v=document.querySelector('.living-frame video');return !v.paused&&v.currentTime>0;});
   await page.locator('.living-toggle').click();assert.ok(await page.locator('.living-frame video').evaluate(v=>v.paused));
   await page.locator('.living-toggle').click();await page.waitForFunction(()=>!document.querySelector('.living-frame video').paused);
-  await page.emulateMedia({reducedMotion:'reduce'});
-  await page.waitForFunction(()=>document.querySelector('.living-frame video').paused);
-  assert.ok(await page.locator('.depth-layer').evaluateAll(es=>es.every(e=>getComputedStyle(e).transform==='none')),'Reduced motion resets depth layers');
   const fallback=await browser.newPage();await fallback.addInitScript(()=>{const get=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,...args){return type==='webgl2'?null:get.call(this,type,...args);};});
   await fallback.goto(process.env.SITE_URL||'http://127.0.0.1:8000/');await fallback.waitForTimeout(1600);
   assert.equal(await fallback.locator('.ribbon-scene').getAttribute('data-ribbon-renderer'),'canvas','No WebGL keeps the immediate Canvas scene');
-  const reduced=await browser.newPage({reducedMotion:'reduce'});const mediaRequests=[];
-  reduced.on('request',r=>{if(r.url().includes('living-frame.mp4'))mediaRequests.push(r.url());});
-  await reduced.goto(process.env.SITE_URL||'http://127.0.0.1:8000/');await reduced.locator('.living-frame').scrollIntoViewIfNeeded();await reduced.waitForTimeout(250);
-  assert.equal(mediaRequests.length,0,'Reduced motion shows the poster without fetching the moving clip');
-  assert.ok(await reduced.locator('.living-frame video').evaluate(v=>v.paused));
   for(const width of [390,320]){await page.setViewportSize({width,height:844});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No overflow in the dynamic mobile grid');}
-  assert.deepEqual(errors,[]);console.log('Passed: layered scroll depth, real Three.js renderer, glass controls, living frame playback/pause, reduced motion, Canvas fallback and mobile grid');
+  assert.deepEqual(errors,[]);console.log('Passed: layered scroll depth, real Three.js renderer, glass controls, living frame playback/pause, Canvas fallback and mobile grid');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1});
