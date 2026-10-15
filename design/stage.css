@@ -78,7 +78,7 @@
 .stage-home #achievements .award-list h3{font:400 clamp(22px,2.2vw,33px)/1.2 Georgia,serif;color:#faeee2;margin:0;letter-spacing:-.03em}
 .stage-home #why{padding-bottom:75px}
 .stage-home #why>.direction-grid{counter-reset:benefits;grid-template-columns:repeat(4,minmax(0,1fr));gap:35px;margin-top:45px}
-.stage-home #why .direction-grid article{counter-increment:benefits;border-top:1px solid #b99e96;padding-top:18px}
+.stage-home #why .direction-grid article{counter-increment:benefits;border-top:1px solid #b99e96;padding:18px 28px 0}
 .stage-home #why .direction-grid article::before{content:counter(benefits,decimal-leading-zero);font:12px Georgia,serif;color:var(--red);display:block;margin-bottom:42px}
 .stage-home #why h3{font:400 27px/1.2 Georgia,serif;letter-spacing:-.03em}
 .stage-home #why .direction-grid p{font-size:13px;line-height:1.8}
@@ -99,7 +99,7 @@
 .stage-home .button{border-radius:0;padding:16px 25px;font-size:13px}
 .stage-home #directions{padding-top:90px;padding-bottom:90px}
 .stage-home #directions .direction-grid{gap:45px}
-.stage-home #directions .direction-grid article{border-top:1px solid #b99e96}
+.stage-home #directions .direction-grid article{border-top:1px solid #b99e96;padding-inline:28px}
 .stage-home #directions h3{font:400 32px/1.15 Georgia,serif;letter-spacing:-.03em}
 .stage-home #directions .direction-grid p{font-size:13px;line-height:1.8}
 .stage-home #school{padding:130px 6vw;background:#1c0c19;color:#f8ecd9;overflow:hidden;isolation:isolate}
@@ -131,10 +131,10 @@
 .stage-home .price-grid article h3{font:400 clamp(38px,4.4vw,65px)/1 Georgia,serif;letter-spacing:-.04em;margin:35px 0 24px;color:var(--red)}
 .stage-home .price-grid article h3 span{font:11px "Segoe UI",sans-serif;letter-spacing:0;display:block;margin-top:12px;color:var(--muted)}
 .stage-home .price-grid article p{font-size:13px}
-.stage-home .offer-grid article{border-color:#b69f96;padding:25px 0}
+.stage-home .offer-grid article{border-color:#b69f96;padding:25px 28px}
 .stage-home .offer-grid h3{font:400 40px Georgia,serif;letter-spacing:-.03em}
 .stage-home #schedule .schedule-grid{gap:0 55px}
-.stage-home #schedule .schedule-grid article{border:0;border-top:1px solid var(--line);border-radius:0;padding:30px 0}
+.stage-home #schedule .schedule-grid article{border:0;border-top:1px solid var(--line);border-radius:0;padding:30px 28px}
 .stage-home #schedule h3{font:400 28px Georgia,serif}
 .stage-home #reviews{background:#e9e0d6}
 .stage-home .review-grid{gap:45px 6vw}
@@ -191,7 +191,7 @@
 .stage-home #enrol .section-head::before{color:#e8bca4}
 .stage-home #enrol h2{max-width:1000px}
 .stage-home .enrol-grid{gap:7vw}
-.stage-home .enrol-grid form{border:0;border-top:1px solid #ffffff55;padding:35px 0;border-radius:0}
+.stage-home .enrol-grid form{border:0;border-top:1px solid #ffffff55;padding:35px 28px;border-radius:0}
 .stage-home .enrol-grid h3{font:400 32px Georgia,serif}
 .stage-home .enrol-grid label{font-size:12px;color:#f7d7ce}
 .stage-home .enrol-grid input:not([type=checkbox]),.stage-home .enrol-grid select{border:0;border-bottom:1px solid #ffffff66;border-radius:0;background:#ffffff0c;color:#fff5ec;padding:14px 12px}
@@ -224,14 +224,14 @@
  .stage-home .hero{min-height:720px}.stage-home .hero-copy{padding:90px 5vw 100px;width:100%}.stage-home .hero h1{font-size:clamp(48px,10.5vw,72px);letter-spacing:-.055em;line-height:1.03;margin-bottom:30px}.stage-home .hero .location{font-size:9px;gap:10px;margin-bottom:30px}.stage-home .hero .location::before{width:20px}.stage-home .hero .intro{font-size:13px;max-width:320px}.stage-home .hero .actions{gap:22px}.stage-home .hero .button{font-size:12px;padding:16px 20px}.stage-home .hero .quiet-link{font-size:11px}.stage-home .hero-photo img{object-position:67% center}.stage-home .hero-photo::after{background:linear-gradient(90deg,#180b16db,#180b1655),linear-gradient(0deg,#180b16 0%,#180b1644 70%,#180b1644)}.stage-home .hero-photo figcaption{top:20px;right:5vw;font-size:8px}.stage-home .hero .stage-light{opacity:.55}.stage-home .hero-wordmark{left:12%;font-size:105px;bottom:0}.stage-home .hero-scroll{bottom:30px;right:5vw;font-size:8px;gap:12px}.stage-home .motion-toggle{left:5vw;bottom:30px;font-size:9px}.stage-home .hero-scene-picker{left:5vw;right:auto;bottom:78px;gap:4px}.stage-home .hero-scene-picker button{min-height:38px;padding:0 10px;font-size:8px}.stage-marquee{padding:18px 0}.stage-marquee-track{font-size:44px}.stage-marquee-track b{margin:0 18px}
  .stage-home .section{padding:70px 6vw}.stage-home .section-head{display:block;margin-bottom:35px}.stage-home .section-head::before{padding:0;margin-bottom:22px;font-size:9px}.stage-home h2{font-size:clamp(36px,9.5vw,48px)}.stage-home .section-head>p{font-size:12px;padding-top:15px;max-width:100%}
  .stage-home #achievements .achievement-layout{display:block}.stage-home #achievements .achievement-layout figure{position:relative;top:auto;margin-bottom:35px}.stage-home #achievements .achievement-layout figure img{height:400px}.stage-home #achievements .award-list>p{font-size:14px}.stage-home #achievements .award-list h3{font-size:25px}.stage-home #achievements .award-list article{gap:18px;padding:22px 0}
- .stage-home #why>.direction-grid{gap:25px}.stage-home #why .direction-grid article::before{margin-bottom:22px}.stage-home #why h3{font-size:22px}.stage-home #why .direction-grid p{font-size:12px}.stage-home #why{padding-bottom:55px}
+ .stage-home #why>.direction-grid{gap:25px}.stage-home #why .direction-grid article{padding-inline:20px}.stage-home #why .direction-grid article::before{margin-bottom:22px}.stage-home #why h3{font-size:22px}.stage-home #why .direction-grid p{font-size:12px}.stage-home #why{padding-bottom:55px}
  .stage-home #programs{display:block}.stage-home #programs .age-buttons{margin-bottom:30px}.stage-home #programs .age-buttons button{font-size:30px;padding:16px 18px}.stage-home #programs .age-buttons button::before{margin-top:5px}.stage-home #programs .program-detail{gap:25px}.stage-home #programs .program-detail figure img{height:280px}.stage-home #programs .program-detail h3{font-size:34px}
- .stage-home #directions{padding-block:70px}.stage-home #directions .direction-grid{gap:25px}.stage-home #directions h3{font-size:27px}
+ .stage-home #directions{padding-block:70px}.stage-home #directions .direction-grid{gap:25px}.stage-home #directions .direction-grid article{padding-inline:20px}.stage-home #directions h3{font-size:27px}
  .stage-home #school{padding:90px 6vw}.stage-home #school h2{font-size:54px;margin-bottom:40px}.stage-home #school .school-columns{display:block}.stage-home #school .school-columns>p{font-size:16px;margin-bottom:40px}.stage-home #school .school-columns h3{font-size:28px}.stage-home #school .school-note{font-size:9px}
  .stage-home #teachers>p{margin-left:0;font-size:13px;margin-bottom:35px}.stage-home .teacher-grid{display:block}.stage-home .teacher-grid article,.stage-home .teacher-grid article:first-child{display:block;padding-top:22px;margin-top:35px}.stage-home .teacher-grid article img,.stage-home .teacher-grid article:first-child img{height:380px;margin-bottom:22px}.stage-home .teacher-grid article h3,.stage-home .teacher-grid article:first-child h3{font-size:35px;margin-bottom:14px}.stage-home .teacher-grid article p,.stage-home .teacher-grid article:first-child p{font-size:13px;line-height:1.8}
- .stage-home .price-grid{display:block}.stage-home .price-grid article{border-right:0;border-bottom:1px solid #b69f96;padding:28px 0}.stage-home .price-grid article:last-child{border-bottom:0}.stage-home .price-grid article h3{font-size:60px;margin:20px 0}.stage-home .offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.stage-home .offer-grid h3{font-size:29px}.stage-home .offer-grid p{font-size:11px}
- .stage-home #schedule .schedule-grid{display:block}.stage-home .review-grid{display:block}.stage-home .review-grid article{margin-bottom:35px;padding:55px 20px 0}.stage-home .review-grid blockquote{font-size:13px}.stage-home #gallery .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:140px}.stage-home #gallery .gallery-grid a:first-child,.stage-home #gallery .gallery-grid a:nth-child(12n+8){grid-column:span 2;grid-row:span 2}.stage-home #gallery .gallery-grid a:nth-child(12n+5){grid-row:span 1}.stage-home #videos{padding-top:20px}.stage-home .video-grid{display:block}.stage-home .video-grid article{margin-bottom:30px}
- .stage-home .enrol-grid{display:block}.stage-home .enrol-grid form{padding:30px 0}.stage-home .enrol-grid form+form{margin-top:35px}.stage-home .enrol-grid h3{font-size:30px}.stage-home #contacts .contact-grid{display:block}.stage-home #contacts .contact-grid>div{margin-top:35px}.stage-home footer{padding:35px 6vw}
+ .stage-home .price-grid{display:block}.stage-home .price-grid article{border-right:0;border-bottom:1px solid #b69f96;padding:28px 0}.stage-home .price-grid article:last-child{border-bottom:0}.stage-home .price-grid article h3{font-size:60px;margin:20px 0}.stage-home .offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.stage-home .offer-grid article{padding-inline:20px}.stage-home .offer-grid h3{font-size:29px}.stage-home .offer-grid p{font-size:11px}
+ .stage-home #schedule .schedule-grid{display:block}.stage-home #schedule .schedule-grid article{padding-inline:20px}.stage-home .review-grid{display:block}.stage-home .review-grid article{margin-bottom:35px;padding:55px 20px 0}.stage-home .review-grid blockquote{font-size:13px}.stage-home #gallery .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:140px}.stage-home #gallery .gallery-grid a:first-child,.stage-home #gallery .gallery-grid a:nth-child(12n+8){grid-column:span 2;grid-row:span 2}.stage-home #gallery .gallery-grid a:nth-child(12n+5){grid-row:span 1}.stage-home #videos{padding-top:20px}.stage-home .video-grid{display:block}.stage-home .video-grid article{margin-bottom:30px}
+ .stage-home .enrol-grid{display:block}.stage-home .enrol-grid form{padding:30px 20px}.stage-home .enrol-grid form+form{margin-top:35px}.stage-home .enrol-grid h3{font-size:30px}.stage-home #contacts .contact-grid{display:block}.stage-home #contacts .contact-grid>div{margin-top:35px}.stage-home footer{padding:35px 6vw}
 }
 html:has(.stage-home){scroll-padding-top:140px}
 @media(prefers-reduced-motion:reduce){html:not([data-motion-preference="manual"]) .stage-marquee-track{transform:none!important}html:not([data-motion-preference="manual"]) .stage-curtain-left{transform:translateX(-100%)!important}html:not([data-motion-preference="manual"]) .stage-curtain-right{transform:translateX(100%)!important}.stage-home header nav a::after{transition:none}}
